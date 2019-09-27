@@ -1,6 +1,8 @@
 package com.unt.registration.dao;
 
+import com.unt.registration.util.User;
+
 public interface RegistrationDao {
 
-	public void getUserDetails();
+	public User getUserDetails();
 }

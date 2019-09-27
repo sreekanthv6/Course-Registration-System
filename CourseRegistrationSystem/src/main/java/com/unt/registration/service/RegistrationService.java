@@ -1,5 +1,7 @@
 package com.unt.registration.service;
 
+import com.unt.registration.util.User;
+
 public interface RegistrationService {
-public void print();
+public User getUserDetails();
 }
