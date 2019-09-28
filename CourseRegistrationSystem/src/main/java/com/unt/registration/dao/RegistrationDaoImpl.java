@@ -19,7 +19,4 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		String sql="SELECT * FROM \"Registration DB\".\"Userdetails\"";
 		return jdbcTemplate.queryForObject(sql, new Object[] {}, new BeanPropertyRowMapper<>(User.class));
 	}
-	public void printing() {
-		System.out.println("yess!");
-	}
 }

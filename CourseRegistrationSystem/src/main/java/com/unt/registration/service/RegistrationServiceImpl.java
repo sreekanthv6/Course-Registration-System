@@ -18,7 +18,5 @@ public class RegistrationServiceImpl implements RegistrationService{
 		return registrationDaoImpl.getUserDetails();
 	}
 	
-	public void printing() {
-		System.out.println("yess!");
-	}
+	
 }
