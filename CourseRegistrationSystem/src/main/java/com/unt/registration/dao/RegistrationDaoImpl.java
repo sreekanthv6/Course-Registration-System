@@ -16,8 +16,10 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Override
 	public User getUserDetails() {
 		// TODO Auto-generated method stub
-		String sql="select * from Userdetails";
+		String sql="SELECT * FROM \"Registration DB\".\"Userdetails\"";
 		return jdbcTemplate.queryForObject(sql, new Object[] {}, new BeanPropertyRowMapper<>(User.class));
 	}
-
+	public void printing() {
+		System.out.println("yess!");
+	}
 }

@@ -19,7 +19,8 @@ public class RegistrationController {
 	@GetMapping(path="/getUserDetails", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 public User getUserDetails() {
 	User user= registrationServiceImpl.getUserDetails();
-	System.out.println(user.getFirstName());
 	return user;
+	
+	
 }
 }

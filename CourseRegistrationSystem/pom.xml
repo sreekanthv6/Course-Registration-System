@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unt</groupId>
-	<artifactId>CourseRegistration</artifactId>
+	<artifactId>CourseRegistrationSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CourseRegistrationSystem</name>
 	<description>Course Registration System</description>
@@ -26,7 +26,6 @@
 <dependency>
   <groupId>org.postgresql</groupId>
   <artifactId>postgresql</artifactId>
-  <version>9.3-1100-jdbc41</version>
 </dependency>
 
 		<dependency>
