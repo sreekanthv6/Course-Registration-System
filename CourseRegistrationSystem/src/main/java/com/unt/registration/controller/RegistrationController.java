@@ -42,5 +42,8 @@ public class RegistrationController {
     	
     	
     }
-
+	@PostMapping("/search")
+	public void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
 }
