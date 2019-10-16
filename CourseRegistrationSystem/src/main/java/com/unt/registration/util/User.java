@@ -9,7 +9,21 @@ public class User {
 	private String mobile;
 	private String password;
 	private int role;
+	private Boolean userExists=false;
+	private Boolean validUser=false;
 	
+	public Boolean getUserExists() {
+		return userExists;
+	}
+	public void setUserExists(Boolean userExists) {
+		this.userExists = userExists;
+	}
+	public Boolean getValidUser() {
+		return validUser;
+	}
+	public void setValidUser(Boolean validUser) {
+		this.validUser = validUser;
+	}
 	public String getId() {
 		return id;
 	}
