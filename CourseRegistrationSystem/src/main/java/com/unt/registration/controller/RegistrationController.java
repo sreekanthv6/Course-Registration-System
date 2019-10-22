@@ -75,5 +75,10 @@ public class RegistrationController {
 	public List<Course> fetchEnrolledCourses(@RequestBody User user) {
 		return registrationServiceImpl.fetchEnrolledCourses(user);
 	}
+	@PostMapping(path = "/swap", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> swap(@RequestBody User user) {
+		return registrationServiceImpl.fetchEnrolledCourses(user);
+	}
 
 }
