@@ -16,4 +16,6 @@ public void setDeptId(String deptId) {
 }
 private String deptId;
 
+
+
 }

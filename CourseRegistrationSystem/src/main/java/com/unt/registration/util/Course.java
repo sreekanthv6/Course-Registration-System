@@ -13,8 +13,16 @@ public class Course {
 	private String degree;
 	private String professor;
 	private int courseMaNumberxStrength;
+	
+	private String courseTimings;
 	public String getCourseId() {
 		return courseId;
+	}
+	public String getCourseTimings() {
+		return courseTimings;
+	}
+	public void setCourseTimings(String courseTimings) {
+		this.courseTimings = courseTimings;
 	}
 	public void setCourseId(String courseId) {
 		this.courseId = courseId;
