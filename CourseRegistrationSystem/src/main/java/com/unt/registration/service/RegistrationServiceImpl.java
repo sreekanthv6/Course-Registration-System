@@ -18,20 +18,18 @@ import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
 
 @Service
-public class RegistrationServiceImpl implements RegistrationService{
-	
+public class RegistrationServiceImpl implements RegistrationService {
+
 	@Autowired
 	RegistrationDaoImpl registrationDaoImpl;
 	@Autowired
 	JavaMailSender javaMailSender;
-	
 
 	@Override
 	public User userValidate(String id, String password) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		if (registrationDaoImpl.userExists(id)== 0)
-		{
+		if (registrationDaoImpl.userExists(id) == 0) {
 			user.setId(id);
 			return user;
 		} else {
@@ -45,17 +43,15 @@ public class RegistrationServiceImpl implements RegistrationService{
 
 	@Override
 	public String signup(User user) {
-		if(registrationDaoImpl.userIdProvided(user.getId())!=0) {
-			if(registrationDaoImpl.userExists(user.getId())==0) {
-					if(registrationDaoImpl.signup(user)==true)	
-						return "signed up";
-					else
-						return "Unexpected Error";
-			}
-			else
+		if (registrationDaoImpl.userIdProvided(user.getId()) != 0) {
+			if (registrationDaoImpl.userExists(user.getId()) == 0) {
+				if (registrationDaoImpl.signup(user) == true)
+					return "signed up";
+				else
+					return "Unexpected Error";
+			} else
 				return "Already signed up";
-		}
-		else
+		} else
 			return "Invalid user";
 	}
 
@@ -68,21 +64,17 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public String resetPassword(User user) {
 		// TODO Auto-generated method stub
-		if(registrationDaoImpl.userExists(user.getId())!=0) {
-			if(user.getEmail().equals(registrationDaoImpl.getEmail(user.getId())))
-			{
-				if(registrationDaoImpl.resetPassword(user)==true)
+		if (registrationDaoImpl.userExists(user.getId()) != 0) {
+			if (user.getEmail().equals(registrationDaoImpl.getEmail(user.getId()))) {
+				if (registrationDaoImpl.resetPassword(user) == true)
 					return "Password reset";
 				else
 					return "Unexpected Error";
-			}
-			else
+			} else
 				return "invalid email";
-				
-					
-		}
-		else
-		return "Invalid user ID";
+
+		} else
+			return "Invalid user ID";
 	}
 
 	@Override
@@ -100,6 +92,10 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public String enroll(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
+		if(registrationDaoImpl.enroll(enrollObject)=="Enrolled") {
+			sendEmail(enrollObject, 1);
+			return "Enrolled";
+		}
 		return registrationDaoImpl.enroll(enrollObject);
 	}
 
@@ -112,47 +108,45 @@ public class RegistrationServiceImpl implements RegistrationService{
 	@Override
 	public boolean dropCourse(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
-		
-		if(registrationDaoImpl.dropCourse(enrollObject))
-		{
-			sendEmail(enrollObject);
+
+		if (registrationDaoImpl.dropCourse(enrollObject)) {
+			sendEmail(enrollObject,1);
 			return true;
 		}
 		return false;
-		
-		
+
 	}
+
 	@Override
-	public boolean sendEmail(EnrollObject enrollObject) {
-		
-		 try {
-	
+	public boolean sendEmail(EnrollObject enrollObject, int value) {
+		String emailId;
+		Course course;
 
-		    	MimeMessage msg = javaMailSender.createMimeMessage();
+		try {
 
-		        
-		        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-				
-		        helper.setTo("sreekanthvobilishetty@gmail.com");
+			MimeMessage msg = javaMailSender.createMimeMessage();
 
-		        helper.setSubject("Notification for enrolling");
-		        String s= enrollObject.getCourseId();
-		        
-		        
-		        
-				helper.setText("<h2>Dropped Course  "+s +"Successfully!</h2>", true);
+			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+			emailId = registrationDaoImpl.getEmail(enrollObject.getUserId());
+			course = registrationDaoImpl.findCourse(enrollObject.getCourseId());
 
-				
-
-		        javaMailSender.send(msg);
-		        return true;
-
-		    } catch (Exception e) {
-		        JOptionPane.showMessageDialog(null, e);
-		        return false;
-		    }
+			helper.setTo(emailId);
+			if (value == 0) {
+				helper.setSubject("Notification for dropping");
+				helper.setText("<h3>Dropped Course  " + course.getCourseName() + "Successfully!</h3>", true);
 			}
-		
+			else {
+				helper.setSubject("Notification for Enrolling");
+				helper.setText("<h3>Enrolled Course  " + course.getCourseName() + "Successfully!</h3>", true);
+			}
+
+			javaMailSender.send(msg);
+			return true;
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+			return false;
+		}
 	}
 
-
+}

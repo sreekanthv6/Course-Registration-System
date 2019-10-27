@@ -18,5 +18,5 @@ public interface RegistrationService {
 	public String enroll(EnrollObject enrollObject);
 	public List<Course> fetchEnrolledCourses(User user);
 	public boolean dropCourse(EnrollObject enrollObject);
-	public boolean sendEmail(EnrollObject enrollObject);
+	public boolean sendEmail(EnrollObject enrollObject, int value);
 }
