@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+
+<body>
+        <form *ngIf="form" [formGroup]="searchForm" (ngSubmit)="onsubmit()">
+          <span>
+            Search Courses
+          </span>
+          <div>
+            <select class="dropdown" required formControlName="deptId" name="deptId">
+              <option value='' selected>Department</option>
+              <option *ngFor="let dept of departments" value={{dept.deptId}}>
+                  {{dept.deptName}}
+              </option>
+              </select>
+          </div>
+          <div>
+            <select class="dropdown" required formControlName="degree" name="degree">
+        
+              <option value='' selected>Degree</option>
+              <option value='UG' >Under Graduate</option>
+              <option value='G' >Graduate</option>
+            </select>
+            
+          </div>
+         
+                   <div>
+            <button type="submit">SUBMIT</button>
+          </div>
+        </form>
+        <div *ngIf="displayCourses">
+          <table>
+              <th>Course ID</th>
+              <th>Course Name</th>
+              <th>Professor</th>
+              
+            <th>Course Timings</th>
+            <th>Amount</th>
+              <tr *ngFor="let course of courses" >
+                <td>{{course.courseId}}</td>
+                  <td>{{course.courseName}}</td>
+                  <td>{{course.professor}}</td>
+                  <td>{{course.courseTimings}}</td>
+                  <td>{{course.amount}}</td>
+                </tr>
+                </table>
+</div>
+</body>
+
+</html>

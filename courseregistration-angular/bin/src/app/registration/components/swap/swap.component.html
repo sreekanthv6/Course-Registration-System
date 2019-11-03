@@ -1,0 +1,39 @@
+ <!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+
+<body>
+    <form *ngIf="form" [formGroup]="swapForm"  (ngSubmit)="onSubmit()">
+      <div>
+        <table><tr><td>Please select the enrolled course you want to swap</td>
+        <td><select class="dropdown" required formControlName="enrolledCourse" name="enrolledCourse">
+       <option value='' selected></option>
+<option *ngFor="let course of enrolledCourses" value={{course.courseId}}>
+    {{course.courseName}}
+</option>
+</select>
+</td>
+</tr>
+<tr>
+  <td>Please select the course you want to swap with</td>
+  <td><select class="dropdown" required formControlName="swapCourse" name="swapCourse">
+      <option value='' selected></option>
+<option *ngFor="let course of availablecourses" value={{course.courseId}}>
+   {{course.courseName}}
+</option>
+</select></td>
+
+</tr>
+</table>
+      </div>
+      <div>
+          <button type="submit">SWAP</button>
+      </div>
+    </form>
+      
+
+</body>
+</html>  -->

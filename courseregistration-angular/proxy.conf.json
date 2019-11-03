@@ -1,0 +1,11 @@
+{
+    "/**" : {
+        "target" : {
+            "host": "localhost",
+            "protocol": "http:",
+            "port": 8089
+        },
+        "secure" : false
+    }
+	
+}

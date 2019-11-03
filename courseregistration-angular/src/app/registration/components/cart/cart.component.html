@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+<style>
+    th {
+     
+     background: green;
+   }
+   td{
+   
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   </style>
+<body>
+  <div>
+  <table>
+      <th>Course ID</th>
+      <th>Course Name</th>
+      <th>Professor</th>
+    <th>Course Timings</th>
+      <tr *ngFor="let course of courses" >
+
+        <td>{{course.courseId}}</td>
+          <td>{{course.courseName}}</td>
+          <td>{{course.professor}}</td>
+          <td>{{course.courseTimings}}</td>
+          <td><button #remove value={{course.courseId}} (click)="removefromcart(remove.value)">REMOVE FROM CART</button></td>
+          <td><button #enrol value={{course.courseId}} (click)="enroll(enrol.value)">ENROLL</button></td>
+
+        </tr>
+        <tr *ngIf="cartEmpty"><td><p>cart is empty</p></td>
+        <td><button [routerLink]="['/select-criteria']">Go back</button></td></tr>
+        </table>
+</div>
+</body>
+</html>
