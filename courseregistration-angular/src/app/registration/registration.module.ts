@@ -20,7 +20,7 @@ import { RegistrationService } from './services/registration.service';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RegistrationRoutingModule,
+    RegistrationRoutingModule
   ],
   providers: [
     RegistrationService,
