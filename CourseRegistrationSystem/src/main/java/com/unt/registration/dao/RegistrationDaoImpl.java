@@ -114,8 +114,8 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	public List<Course> fetchEnrolledCourses(User user) {
-		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=?";
-		Object[] args = { user.getId() };
+		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and \"Registration DB\".\"Enrollments\".semester=? and \"Registration DB\".\"Enrollments\"=?";
+		Object[] args = { user.getId(), this.getCurrentSemester(),Calendar.getInstance().get(Calendar.YEAR)  };
 		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
 

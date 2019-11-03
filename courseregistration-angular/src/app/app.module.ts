@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationModule } from './registration/registration.module';
-import { SearchComponent } from './search/components/search/search.component';
 import { SearchModule } from './search/search.module';
+import { MyclassesModule } from './myclasses/myclasses.module';
 //import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { SearchModule } from './search/search.module';
     RegistrationModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SearchModule
+    SearchModule,
+    MyclassesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
