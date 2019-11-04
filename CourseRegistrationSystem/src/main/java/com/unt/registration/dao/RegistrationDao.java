@@ -6,6 +6,7 @@ import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Enrollment;
+import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
@@ -30,5 +31,5 @@ public interface RegistrationDao {
 	public String getPrerequisites(String id);
 	public boolean postPayment(Payment payment);
 	public List<Payment> pastPayments(User user);
-	public List<Enrollment> viewGrades(User user);
+	public List<Grade> viewGrades(User user);
 }

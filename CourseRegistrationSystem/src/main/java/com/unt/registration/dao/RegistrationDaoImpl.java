@@ -14,6 +14,7 @@ import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Enrollment;
+import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
@@ -117,7 +118,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 
 	public List<Course> fetchEnrolledCourses(User user) {
 		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and \"Registration DB\".\"Enrollments\".semester=? and \"Registration DB\".\"Enrollments\"=?";
-		Object[] args = { user.getId(), this.getCurrentSemester(),Calendar.getInstance().get(Calendar.YEAR)  };
+		Object[] args = { user.getId(), this.getCurrentSemester(), Calendar.getInstance().get(Calendar.YEAR) };
 		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
 
@@ -216,6 +217,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 			return "empty";
 
 	}
+
 	@Override
 	public boolean postPayment(Payment payment) {
 		// TODO Auto-generated method stub
@@ -238,12 +240,12 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public List<Enrollment> viewGrades(User user) {
+	public List<Grade> viewGrades(User user) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT * FROM \"Registration DB\".\"Enrollments\" where id='" + user.getId()
-				+ "' AND grade!=null";
-		return (List<Enrollment>) jdbcTemplate.queryForObject(sql,
-				new BeanPropertyRowMapper<Enrollment>(Enrollment.class));
+		String sql = "select \"courseId\",\"courseName\",grade from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and grade!=null";
+		
+		return (List<Grade>) jdbcTemplate.queryForObject(sql,new Object[] { user.getId() },
+				new BeanPropertyRowMapper<Grade>(Grade.class));
 	}
 
 }

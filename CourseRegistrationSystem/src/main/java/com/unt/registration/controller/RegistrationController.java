@@ -16,6 +16,7 @@ import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Enrollment;
+import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.dao.RegistrationDaoImpl;
@@ -91,7 +92,7 @@ public class RegistrationController {
 //	}
 
 	@PostMapping(path = "/viewGrades", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public List<Enrollment> viewGrades(@RequestBody User user) {
+	public List<Grade> viewGrades(@RequestBody User user) {
 		return registrationDaoImpl.viewGrades(user);
 	}
 
