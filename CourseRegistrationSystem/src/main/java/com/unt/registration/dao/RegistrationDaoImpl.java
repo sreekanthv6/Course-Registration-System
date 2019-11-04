@@ -13,6 +13,8 @@ import com.unt.registration.service.RegistrationServiceImpl;
 import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
+import com.unt.registration.util.Enrollment;
+import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
 
@@ -213,6 +215,35 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		else
 			return "empty";
 
+	}
+	@Override
+	public boolean postPayment(Payment payment) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO * FROM \"Registration DB\".\"Payments\" where values(?,?,?,?)";
+		Object[] args = { payment.getId(), payment.getPaymentId(), payment.getPaymentDate(),
+				payment.getPaymentAmount() };
+		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC };
+		if (jdbcTemplate.update(sql, args, argTypes) == 1)
+			return true;
+		return false;
+	}
+
+	@Override
+	public List<Payment> pastPayments(User user) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM \"Registration DB\".\"Payments\" where id=?";
+		return (List<Payment>) jdbcTemplate.queryForObject(sql, new Object[] { user.getId() },
+				new BeanPropertyRowMapper<Payment>(Payment.class));
+
+	}
+
+	@Override
+	public List<Enrollment> viewGrades(User user) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM \"Registration DB\".\"Enrollments\" where id='" + user.getId()
+				+ "' AND grade!=null";
+		return (List<Enrollment>) jdbcTemplate.queryForObject(sql,
+				new BeanPropertyRowMapper<Enrollment>(Enrollment.class));
 	}
 
 }

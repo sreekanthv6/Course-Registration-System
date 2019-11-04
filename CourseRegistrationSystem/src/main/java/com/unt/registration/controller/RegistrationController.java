@@ -16,7 +16,9 @@ import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Enrollment;
+import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.dao.RegistrationDaoImpl;
 import com.unt.registration.service.RegistrationServiceImpl;
 import com.unt.registration.util.User;
 
@@ -27,6 +29,8 @@ public class RegistrationController {
 
 	@Autowired
 	RegistrationServiceImpl registrationServiceImpl;
+	@Autowired
+	RegistrationDaoImpl registrationDaoImpl;
 
 	@PostMapping(path = "/login", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public User userValidate(@RequestBody User user) {
@@ -79,6 +83,22 @@ public class RegistrationController {
 			MediaType.APPLICATION_XML_VALUE })
 	public List<Course> swap(@RequestBody User user) {
 		return registrationServiceImpl.fetchEnrolledCourses(user);
+	}
+//	@PostMapping(path = "/viewClasses", produces = { MediaType.APPLICATION_JSON_VALUE,
+//			MediaType.APPLICATION_XML_VALUE })
+//	public List<Enrollment> viewClasses(@RequestBody User user) {
+//		return registrationDaoImpl.getClasses(user.getId());
+//	}
+
+	@PostMapping(path = "/viewGrades", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public List<Enrollment> viewGrades(@RequestBody User user) {
+		return registrationDaoImpl.viewGrades(user);
+	}
+
+	@PostMapping(path = "/pastPayment", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Payment> pastPayments(@RequestBody User user) {
+		return registrationDaoImpl.pastPayments(user);
 	}
 
 }
