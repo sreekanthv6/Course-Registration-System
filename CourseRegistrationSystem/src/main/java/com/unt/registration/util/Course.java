@@ -1,5 +1,7 @@
 package com.unt.registration.util;
 
+import java.util.Date;
+
 public class Course {
 	private String courseId;
 	private String courseName ;
@@ -13,7 +15,29 @@ public class Course {
 	private String degree;
 	private String professor;
 	private int courseMaNumberxStrength;
+	private Date startDate;
+	private Date endDate;
+	private String days;
 	
+	
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
 	private String courseTimings;
 	public String getCourseId() {
 		return courseId;

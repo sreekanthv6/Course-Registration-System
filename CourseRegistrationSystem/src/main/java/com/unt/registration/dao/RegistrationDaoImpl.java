@@ -117,7 +117,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	public List<Course> fetchEnrolledCourses(User user) {
-		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and \"Registration DB\".\"Enrollments\".semester=? and \"Registration DB\".\"Enrollments\"=?";
+		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and \"Registration DB\".\"Enrollments\".semester=? and \"Registration DB\".\"Enrollments\".year=?";
 		Object[] args = { user.getId(), this.getCurrentSemester(), Calendar.getInstance().get(Calendar.YEAR) };
 		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
@@ -234,7 +234,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	public List<Payment> pastPayments(User user) {
 		// TODO Auto-generated method stub
 		String sql = "SELECT * FROM \"Registration DB\".\"Payments\" where id=?";
-		return (List<Payment>) jdbcTemplate.queryForObject(sql, new Object[] { user.getId() },
+		return (List<Payment>) jdbcTemplate.query(sql, new Object[] { user.getId() },
 				new BeanPropertyRowMapper<Payment>(Payment.class));
 
 	}
@@ -242,9 +242,9 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Override
 	public List<Grade> viewGrades(User user) {
 		// TODO Auto-generated method stub
-		String sql = "select \"courseId\",\"courseName\",grade from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and grade!=null";
+		String sql = "select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id=? and grade IS NOT NULL";
 		
-		return (List<Grade>) jdbcTemplate.queryForObject(sql,new Object[] { user.getId() },
+		return (List<Grade>) jdbcTemplate.query(sql,new Object[] { user.getId() },
 				new BeanPropertyRowMapper<Grade>(Grade.class));
 	}
 
