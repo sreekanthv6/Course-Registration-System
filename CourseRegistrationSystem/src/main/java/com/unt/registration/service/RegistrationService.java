@@ -19,4 +19,6 @@ public interface RegistrationService {
 	public List<Course> fetchEnrolledCourses(User user);
 	public boolean dropCourse(EnrollObject enrollObject);
 	public boolean sendEmail(EnrollObject enrollObject, int value);
+	public int viewDues(User user);
+	
 }

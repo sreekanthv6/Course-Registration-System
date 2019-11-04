@@ -29,7 +29,9 @@ public interface RegistrationDao {
 	public boolean increaseStrength(String id);
 	public int checkPrerequisites(String userId, String courseId);
 	public String getPrerequisites(String id);
-	public boolean postPayment(Payment payment);
+	public int postPayment(Payment payment,User user);
 	public List<Payment> pastPayments(User user);
 	public List<Grade> viewGrades(User user);
+	public int pastPaymentsAmount(User user);
+	public int totalAmount(User user);
 }

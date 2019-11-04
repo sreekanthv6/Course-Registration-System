@@ -101,5 +101,9 @@ public class RegistrationController {
 	public List<Payment> pastPayments(@RequestBody User user) {
 		return registrationDaoImpl.pastPayments(user);
 	}
-
+	@PostMapping(path = "/viewDues", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public int viewDues(@RequestBody User user) {
+		return registrationServiceImpl.viewDues(user);
+	}
 }

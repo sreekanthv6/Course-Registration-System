@@ -149,4 +149,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 		}
 	}
 
+	@Override
+	public int viewDues(User user) {
+		// TODO Auto-generated method stub
+		int pastPaymentsAmount=registrationDaoImpl.pastPaymentsAmount(user);
+		int totalAmount=registrationDaoImpl.totalAmount(user);
+		return totalAmount-pastPaymentsAmount;
+		
+		
+	}
+
 }

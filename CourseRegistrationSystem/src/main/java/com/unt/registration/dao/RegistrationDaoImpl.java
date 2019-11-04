@@ -219,15 +219,18 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public boolean postPayment(Payment payment) {
+	public int postPayment(Payment payment,User user) {
 		// TODO Auto-generated method stub
+		if(registrationServiceImpl.viewDues(user)>0) {
 		String sql = "INSERT INTO * FROM \"Registration DB\".\"Payments\" where values(?,?,?,?)";
 		Object[] args = { payment.getId(), payment.getPaymentId(), payment.getPaymentDate(),
 				payment.getPaymentAmount() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC };
 		if (jdbcTemplate.update(sql, args, argTypes) == 1)
-			return true;
-		return false;
+			return 0;
+		return 2;
+		}
+		return 1;
 	}
 
 	@Override
@@ -247,5 +250,19 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		return (List<Grade>) jdbcTemplate.query(sql,new Object[] { user.getId() },
 				new BeanPropertyRowMapper<Grade>(Grade.class));
 	}
+	@Override
+	public int pastPaymentsAmount(User user) {
+		// TODO Auto-generated method stub
+		String sql="select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id="+user.getId();
+		return jdbcTemplate.queryForObject(sql,  Integer.class);
+	}
+
+	@Override
+	public int totalAmount(User user) {
+		// TODO Auto-generated method stub
+		String sql="select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id="+user.getId();
+		return jdbcTemplate.queryForObject(sql,  Integer.class);
+	}
+
 
 }
