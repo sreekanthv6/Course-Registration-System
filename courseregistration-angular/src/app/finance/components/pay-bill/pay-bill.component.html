@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+
+<body>
+        <form [formGroup]="paymentForm" (ngSubmit)="onsubmit()">
+          <span>
+            Payment
+          </span>
+          <div>
+           <table>
+             <tr>
+               <td>Total Due:</td>
+               <td>{{due}}$</td>
+             </tr>
+             <tr>
+                <td>Enter Amount</td>
+                <td>
+                  <input type="number" required formControlName="paymentAmount" name="paymentAmount"/>
+                </td>
+              </tr>
+           </table>
+          </div>
+           <div>
+              <button type="submit">PAY</button>
+            </div>
+        </form>
+     
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+
+<body>
+    <div>
+        <table>
+          <th>Payment ID</th>
+            <th>Payment Date</th>
+            <th>Payment Amount</th>
+            <tr *ngFor="let payment of payments" >
+              <td>{{payment.paymentId}}</td>
+              <td>{{payment.paymentDate}}</td>
+                <td>{{payment.paymentAmount}}$</td>
+              </tr>
+              </table>
+</div>
+  </body>
+  </html>
+

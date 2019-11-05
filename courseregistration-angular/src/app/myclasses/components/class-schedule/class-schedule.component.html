@@ -1,3 +1,30 @@
-<p>
-  class-schedule works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+
+<body>
+    <div>
+        <table>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Start/End dates</th>
+            <th>Days</th>
+            
+          <th>Course Timings</th>
+          
+            <tr *ngFor="let course of enrolledcourses" >
+              <td>{{course.courseId}}</td>
+                <td>{{course.courseName}}</td>
+                <td>{{course.startDate}} - {{course.endDate}}</td>
+                <td>{{course.days}}</td>
+                <td>{{course.courseTimings}}</td>
+                
+              </tr>
+              </table>
+</div>
+  </body>
+  </html>
+

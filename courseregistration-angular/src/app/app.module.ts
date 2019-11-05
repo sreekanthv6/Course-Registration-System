@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrationModule } from './registration/registration.module';
 import { SearchModule } from './search/search.module';
 import { MyclassesModule } from './myclasses/myclasses.module';
+import { FinanceModule } from './finance/finance.module';
 //import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MyclassesModule } from './myclasses/myclasses.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     SearchModule,
-    MyclassesModule
+    MyclassesModule,
+    FinanceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

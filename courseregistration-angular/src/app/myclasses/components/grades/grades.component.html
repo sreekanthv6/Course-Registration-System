@@ -7,10 +7,10 @@
     <th>Course Name</th>
     <th>Grade</th>
     
-     <tr *ngFor="let course of courses" >
-      <td>{{course.courseId}}</td>
-        <td>{{course.courseName}}</td>
-        <td>{{course.grade}}</td>
+     <tr *ngFor="let gradeObject of gradeObjects" >
+      <td>{{gradeObject.courseId}}</td>
+        <td>{{gradeObject.courseName}}</td>
+        <td>{{gradeObject.grade}}</td>
       </tr>
       </table>
 
