@@ -5,6 +5,7 @@ import java.util.List;
 import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
+import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
 
@@ -19,6 +20,6 @@ public interface RegistrationService {
 	public List<Course> fetchEnrolledCourses(User user);
 	public boolean dropCourse(EnrollObject enrollObject);
 	public boolean sendEmail(EnrollObject enrollObject, int value);
-	public int viewDues(User user);
+	public float viewDues(Payment payment);
 	
 }

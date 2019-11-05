@@ -85,25 +85,35 @@ public class RegistrationController {
 	public List<Course> swap(@RequestBody User user) {
 		return registrationServiceImpl.fetchEnrolledCourses(user);
 	}
-//	@PostMapping(path = "/viewClasses", produces = { MediaType.APPLICATION_JSON_VALUE,
-//			MediaType.APPLICATION_XML_VALUE })
-//	public List<Enrollment> viewClasses(@RequestBody User user) {
-//		return registrationDaoImpl.getClasses(user.getId());
-//	}
+	@PostMapping(path = "/postPayment", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public int postPayment(@RequestBody Payment payment) {
+		return registrationDaoImpl.postPayment(payment);
+	}
 
 	@PostMapping(path = "/viewGrades", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public List<Grade> viewGrades(@RequestBody User user) {
 		return registrationDaoImpl.viewGrades(user);
 	}
 
-	@PostMapping(path = "/pastPayment", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(path = "/pastPayments", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public List<Payment> pastPayments(@RequestBody User user) {
 		return registrationDaoImpl.pastPayments(user);
 	}
 	@PostMapping(path = "/viewDues", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public int viewDues(@RequestBody User user) {
-		return registrationServiceImpl.viewDues(user);
+	public float viewDues(@RequestBody Payment payment) {
+		return registrationServiceImpl.viewDues(payment);
+	}
+	@PostMapping(path = "/mandatoryCoursesDone", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> mandatoryCoursesDone(@RequestBody User user) {
+		return registrationDaoImpl.mandatoryCoursesDone(user);
+	}
+	@PostMapping(path = "/mandatoryCoursesNotDone", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> mandatoryCoursesNotDone(@RequestBody User user) {
+		return registrationDaoImpl.mandatoryCoursesNotDone(user);
 	}
 }

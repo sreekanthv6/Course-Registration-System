@@ -1,8 +1,12 @@
 package com.unt.registration.dao;
 
 import java.sql.Types;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -219,11 +223,18 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public int postPayment(Payment payment,User user) {
+	public int postPayment(Payment payment) {
 		// TODO Auto-generated method stub
-		if(registrationServiceImpl.viewDues(user)>0) {
-		String sql = "INSERT INTO * FROM \"Registration DB\".\"Payments\" where values(?,?,?,?)";
-		Object[] args = { payment.getId(), payment.getPaymentId(), payment.getPaymentDate(),
+		float due=this.totalAmount(payment)-this.pastPaymentsAmount(payment);
+		if(due>0) {
+			Date date = Calendar.getInstance().getTime();  
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+            String strDate = dateFormat.format(date);
+            Random rand = new Random();  
+            int randomId= rand.nextInt(1000000); 
+            String paymentId=String.valueOf(randomId);
+		String sql = "INSERT INTO \"Registration DB\".\"Payments\" values(?,?,?,?)";
+		Object[] args = { payment.getId(), paymentId, strDate,
 				payment.getPaymentAmount() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC };
 		if (jdbcTemplate.update(sql, args, argTypes) == 1)
@@ -232,7 +243,6 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		}
 		return 1;
 	}
-
 	@Override
 	public List<Payment> pastPayments(User user) {
 		// TODO Auto-generated method stub
@@ -251,18 +261,36 @@ public class RegistrationDaoImpl implements RegistrationDao {
 				new BeanPropertyRowMapper<Grade>(Grade.class));
 	}
 	@Override
-	public int pastPaymentsAmount(User user) {
+	public float pastPaymentsAmount(Payment payment) {
 		// TODO Auto-generated method stub
-		String sql="select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id="+user.getId();
-		return jdbcTemplate.queryForObject(sql,  Integer.class);
+		String sql="select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id='"+payment.getId()+"'";
+		return jdbcTemplate.queryForObject(sql,  Float.class);
 	}
 
 	@Override
-	public int totalAmount(User user) {
+	public float totalAmount(Payment payment) {
 		// TODO Auto-generated method stub
-		String sql="select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id="+user.getId();
-		return jdbcTemplate.queryForObject(sql,  Integer.class);
+		String sql="select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id='"+payment.getId()+"'";
+		return jdbcTemplate.queryForObject(sql,  Float.class);
 	}
 
+	@Override
+	public List<Course> mandatoryCoursesDone(User user) {
+		// TODO Auto-generated method stub
+		String sql="select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON"
+				+ " \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where "
+				+ "\"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id="+user.getId()
+				+"AND \"Registration DB\".\"Courses\".\"deptId\"="+user.getDeptId();
+		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Course>(Course.class));
+	}
 
+	@Override
+	public List<Course> mandatoryCoursesNotDone(User user) {
+		// TODO Auto-generated method stub
+		String sql="select * from  \"Registration DB\".\"Courses\"  where \"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id='"+user.getId() + "'AND \"Registration DB\".\"Courses\".\"deptId\"='"+user.getDeptId()
+		+"'NOT IN (\"select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON" + 
+		"				 \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id='"+user.getId()+"' AND \"Registration DB\".\"Courses\".\"deptId\"='"+user.getDeptId()+"')";
+					
+		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Course>(Course.class));
+	}
 }

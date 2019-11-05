@@ -14,6 +14,7 @@ import com.unt.registration.dao.RegistrationDaoImpl;
 import com.unt.registration.util.Course;
 import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
+import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
 import com.unt.registration.util.User;
 
@@ -150,10 +151,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public int viewDues(User user) {
+	public float viewDues(Payment payment) {
 		// TODO Auto-generated method stub
-		int pastPaymentsAmount=registrationDaoImpl.pastPaymentsAmount(user);
-		int totalAmount=registrationDaoImpl.totalAmount(user);
+		float pastPaymentsAmount=registrationDaoImpl.pastPaymentsAmount(payment);
+		float totalAmount=registrationDaoImpl.totalAmount(payment);
 		return totalAmount-pastPaymentsAmount;
 		
 		

@@ -4,7 +4,7 @@ public class Payment {
 	private String id;
 	private String paymentId;
 	private String paymentDate;
-	private int paymentAmount;
+	private float paymentAmount;
 	public String getId() {
 		return id;
 	}
@@ -23,7 +23,7 @@ public class Payment {
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	public int getPaymentAmount() {
+	public float getPaymentAmount() {
 		return paymentAmount;
 	}
 	public void setPaymentAmount(int paymentAmount) {

@@ -14,7 +14,7 @@ public class Course {
 	private int strength;
 	private String degree;
 	private String professor;
-	private int courseMaNumberxStrength;
+	private int courseMaxStrength;
 	private Date startDate;
 	private Date endDate;
 	private String days;
@@ -111,10 +111,10 @@ public class Course {
 	public void setProfessor(String professor) {
 		this.professor = professor;
 	}
-	public int getCourseMaNumberxStrength() {
-		return courseMaNumberxStrength;
+	public int getCourseMaxStrength() {
+		return courseMaxStrength;
 	}
-	public void setCourseMaNumberxStrength(int courseMaNumberxStrength) {
-		this.courseMaNumberxStrength = courseMaNumberxStrength;
+	public void setCourseMaxStrength(int courseMaxStrength) {
+		this.courseMaxStrength = courseMaxStrength;
 	}
 }
