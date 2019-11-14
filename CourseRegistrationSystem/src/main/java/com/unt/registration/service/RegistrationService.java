@@ -21,5 +21,7 @@ public interface RegistrationService {
 	public boolean dropCourse(EnrollObject enrollObject);
 	public boolean sendEmail(EnrollObject enrollObject, int value);
 	public float viewDues(Payment payment);
+	public void sendEmailForPayment(Payment payment);
+	public int postPayment(Payment payment);
 	
 }

@@ -159,5 +159,41 @@ public class RegistrationServiceImpl implements RegistrationService {
 		
 		
 	}
+	@Override
+	public void sendEmailForPayment(Payment payment) {
+		String emailId;
+		Course course;
+
+		try {
+
+			MimeMessage msg = javaMailSender.createMimeMessage();
+
+			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+			emailId = registrationDaoImpl.getEmail(payment.getId());
+
+			helper.setTo(emailId);
+			
+				helper.setSubject("Notification for Payment");
+				helper.setText("<h3>Payment  " + payment.getPaymentAmount() + "$ received Successfully!</h3>", true);
+			
+
+			javaMailSender.send(msg);
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+
+		}
+	}
+
+	@Override
+	public int postPayment(Payment payment) {
+		// TODO Auto-generated method stub
+		if(registrationDaoImpl.postPayment(payment)==0)
+		{
+			this.sendEmailForPayment(payment);
+			return 0;
+		}
+		return 2;
+	}
 
 }

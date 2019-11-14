@@ -1,3 +1,53 @@
-<p>
-  mandate-courses works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Course Registration System</title>
+</head>
+<style>
+    * html  {
+      font:Arial;
+    }
+    th {
+     
+     background: green;
+   }
+   td{
+   border:1;
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   </style>
+<body>
+    <div>
+      <h6>Mandatory courses which you have completed/enrolled:</h6>
+        <table border=2>
+            <th>Course ID</th>
+            <th>Course Name</th>          
+            <tr *ngFor="let course of donecourses" >
+              <td>{{course.courseId}}</td>
+                <td>{{course.courseName}}</td>
+                
+              </tr>
+              </table>
+</div>
+<div>
+    <h6>Mandatory courses which are yet to be done:</h6>
+      <table border=2>
+          <th>Course ID</th>
+          <th>Course Name</th>          
+          <tr *ngFor="let course of notenrolledcourses" >
+            <td>{{course.courseId}}</td>
+              <td>{{course.courseName}}</td>
+              
+            </tr>
+            </table>
+</div>
+  </body>
+  </html>
+

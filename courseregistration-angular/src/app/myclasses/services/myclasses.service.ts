@@ -9,6 +9,8 @@ import { User } from 'src/app/user/model/user';
 })
 export class MyclassesService {
 viewGradesUrl=environment.api + '/RegistrationController/viewGrades';
+mandateCoursesDoneUrl=environment.api + '/RegistrationController/mandatoryCoursesDone';
+mandateCoursesNotDoneUrl=environment.api + '/RegistrationController/mandatoryCoursesNotDone';
   constructor(private http: Http,
     private router: Router) { }
     public viewGrades(user: User): any{
@@ -23,5 +25,31 @@ viewGradesUrl=environment.api + '/RegistrationController/viewGrades';
         })
       };
       return this.http.post(this.viewGradesUrl, user, httpHeaderOptions);
+    }
+    public mandatoryCoursesDone(user: User): any{
+      const httpHeaderOptions =
+      {
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X- Request-With'
+        })
+      };
+      return this.http.post(this.mandateCoursesDoneUrl, user, httpHeaderOptions);
+    }
+    public mandatoryCoursesNotDone(user: User): any{
+      const httpHeaderOptions =
+      {
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X- Request-With'
+        })
+      };
+      return this.http.post(this.mandateCoursesNotDoneUrl, user, httpHeaderOptions);
     }
 }

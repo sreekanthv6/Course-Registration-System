@@ -13,8 +13,8 @@ export class Course {
     courseMaNumberxStrength: Number;
     courseTimings: String;
     isAddedtoCart: Boolean;
-    startDate: Date;
-    endDate: Date;
+    startDate: String;
+    endDate: String;
     days: String;
     constructor() {
         this.courseId = '';
@@ -30,5 +30,7 @@ export class Course {
         this.courseMaNumberxStrength=0;
         this.courseTimings='';
         this.isAddedtoCart=false;
+        this.startDate='';
+        this.endDate='';
     }
 }

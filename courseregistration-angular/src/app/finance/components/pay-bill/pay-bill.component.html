@@ -4,14 +4,32 @@
 <head>
   <title>Course Registration System</title>
 </head>
-
+<style>
+    * html  {
+      font:Arial;
+    }
+    th {
+     
+     background: green;
+   }
+   td{
+   
+   text-align:center;
+   }
+   table tr:nth-child(even) {
+     background-color: #eee;
+   }
+   table tr:nth-child(odd) {
+     background-color: #fff;
+   }
+   </style>
 <body>
         <form [formGroup]="paymentForm" (ngSubmit)="onsubmit()">
           <span>
             Payment
           </span>
           <div>
-           <table>
+           <table >
              <tr>
                <td>Total Due:</td>
                <td>{{due}}$</td>

@@ -238,7 +238,9 @@ public class RegistrationDaoImpl implements RegistrationDao {
 				payment.getPaymentAmount() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC };
 		if (jdbcTemplate.update(sql, args, argTypes) == 1)
+		{
 			return 0;
+		}
 		return 2;
 		}
 		return 1;
@@ -279,18 +281,22 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		// TODO Auto-generated method stub
 		String sql="select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON"
 				+ " \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where "
-				+ "\"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id="+user.getId()
-				+"AND \"Registration DB\".\"Courses\".\"deptId\"="+user.getDeptId();
+				+ "\"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id='"+user.getId()+"'"
+				+"AND \"Registration DB\".\"Courses\".\"deptId\"='"+user.getDeptId()+"'";
 		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Course>(Course.class));
 	}
 
 	@Override
 	public List<Course> mandatoryCoursesNotDone(User user) {
 		// TODO Auto-generated method stub
-		String sql="select * from  \"Registration DB\".\"Courses\"  where \"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id='"+user.getId() + "'AND \"Registration DB\".\"Courses\".\"deptId\"='"+user.getDeptId()
-		+"'NOT IN (\"select * from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON" + 
-		"				 \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id='"+user.getId()+"' AND \"Registration DB\".\"Courses\".\"deptId\"='"+user.getDeptId()+"')";
+		String sql="select * from  \"Registration DB\".\"Courses\"  \r\n" + 
+				" \r\n" + 
+				"where \"Registration DB\".\"Courses\".\"isMandatory\"=true AND (\r\n" + 
+				"														  \"Registration DB\".\"Courses\".\"deptId\"=?) and \"Courses\".\"courseId\"\r\n" + 
+				"		NOT IN(select \"Courses\".\"courseId\" from \"Registration DB\".\"Enrollments\" JOIN \r\n" + 
+				"			   \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \r\n" + 
+				"				\"Registration DB\".\"Courses\".\"isMandatory\"=true AND \"Registration DB\".\"Enrollments\".id=?);";
 					
-		return jdbcTemplate.query(sql,new BeanPropertyRowMapper<Course>(Course.class));
+		return jdbcTemplate.query(sql,new Object[] { user.getDeptId(), user.getId() }, new BeanPropertyRowMapper<Course>(Course.class));
 	}
 }

@@ -88,7 +88,7 @@ public class RegistrationController {
 	@PostMapping(path = "/postPayment", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public int postPayment(@RequestBody Payment payment) {
-		return registrationDaoImpl.postPayment(payment);
+		return registrationServiceImpl.postPayment(payment);
 	}
 
 	@PostMapping(path = "/viewGrades", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
