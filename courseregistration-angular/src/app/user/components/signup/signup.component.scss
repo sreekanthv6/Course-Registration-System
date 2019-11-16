@@ -1,0 +1,82 @@
+.box {
+    width:500px;
+    height:620px;
+    background-color:white;
+    position:absolute;
+    margin-left:-150px; /* half of width */
+    margin-top:-289px;  /* half of height */
+    top:50%;
+    left:50%;
+    padding-left: 30px;
+    opacity: 0.9;
+}
+
+    input[type=text],
+    select {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=password] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type=email] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: 1px solid green;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    h4{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    
+
+    button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 345px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+
+    
+

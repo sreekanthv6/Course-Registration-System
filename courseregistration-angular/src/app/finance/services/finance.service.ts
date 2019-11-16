@@ -25,6 +25,7 @@ paymentUrl=environment.api + '/RegistrationController/postPayment';
           'Access-Control-Allow-Headers': 'Origin, Content-Type, Accept, Authorization, X- Request-With'
         })
       };
+      console.log("I am the dumb .. "+JSON.stringify(user));
       return this.http.post(this.historyUrl, user, httpHeaderOptions);
     }
     public viewDues(user: User): any{
