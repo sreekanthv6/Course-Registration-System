@@ -22,18 +22,19 @@ public interface RegistrationDao {
 	public String getEmail(String id);
 	public List<Course> getCourses(SelectCriteria selectCriteria);
 	public Course findCourse(String courseId);
-	public String enroll(EnrollObject enrollObject);
+	public int enroll(EnrollObject enrollObject);
 	public List<Course> fetchEnrolledCourses(User user);
-	public boolean dropCourse(EnrollObject enrollObject);
-	public boolean decreaseStrength(String id);
-	public boolean increaseStrength(String id);
+	public int dropCourse(EnrollObject enrollObject);
+	public int decreaseStrength(String id);
+	public int increaseStrength(String id);
 	public int checkPrerequisites(String userId, String courseId);
 	public String getPrerequisites(String id);
-	public int postPayment(Payment payment);
+	public int postPayment(Payment payment, String paymentId, String strDate);
 	public List<Payment> pastPayments(User user);
 	public List<Grade> viewGrades(User user);
 	public float pastPaymentsAmount(Payment payment);
 	public float totalAmount(Payment payment);
 	public List<Course> mandatoryCoursesNotDone(User user);
 	public List<Course> mandatoryCoursesDone(User user);
+	public int ifPrerequisitesExist(String courseId);
 }

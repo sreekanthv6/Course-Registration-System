@@ -66,7 +66,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping(path = "/enroll", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public String enroll(@RequestBody EnrollObject enrollObject) {
+	public int enroll(@RequestBody EnrollObject enrollObject) {
 		return registrationServiceImpl.enroll(enrollObject);
 	}
 
