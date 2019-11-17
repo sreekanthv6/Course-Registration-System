@@ -16,6 +16,7 @@ export class PayBillComponent implements OnInit {
   paid: Number;
   user: User;
   payment: Payment=new Payment();
+  submitted: Boolean=false;
   constructor(private formBuilder: FormBuilder, private financeService: FinanceService, private router: Router) { }
 
   ngOnInit() {
@@ -23,12 +24,14 @@ export class PayBillComponent implements OnInit {
     this.paymentForm = this.formBuilder.group({ paymentAmount: ['', Validators.required]});
     this.viewDues();
   }
+  get f() { return this.paymentForm.controls; }
   viewDues() {
     this.financeService.viewDues(this.user).subscribe(resp => {
       this.due = <Number>resp.json();
     });
   }
   onsubmit(){
+    this.submitted=true;
 this.payment.paymentAmount=this.paymentForm.value.paymentAmount;
 this.payment.id=this.user.id;
     this.financeService.postPayment(this.payment).subscribe(resp => {

@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   constructor(private userService: UserService, private registrationService: RegistrationService) { }
   ngOnInit() {
 
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.userService.getSession('user');
     this.loadCart();
   }
 

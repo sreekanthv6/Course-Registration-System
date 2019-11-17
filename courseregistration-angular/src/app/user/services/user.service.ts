@@ -27,7 +27,7 @@ export class UserService {
 getSession(key: string): any {
   if (typeof window !== 'undefined') {
       //let retrievedObject = sessionStorage.getItem(key) as string;
-      let retrievedObject = JSON.parse(localStorage.getItem(key)) as any;
+      let retrievedObject = JSON.parse(sessionStorage.getItem(key)) as any;
       console.log(JSON.stringify(retrievedObject)); 
       return retrievedObject;
   }
