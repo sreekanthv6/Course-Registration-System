@@ -4,6 +4,7 @@ import { FinanceService } from '../../services/finance.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user/model/user';
 import { Payment } from '../../model/payment';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-pay-bill',
@@ -16,11 +17,10 @@ export class PayBillComponent implements OnInit {
   paid: Number;
   user: User;
   payment: Payment=new Payment();
-  submitted: Boolean=false;
-  constructor(private formBuilder: FormBuilder, private financeService: FinanceService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private financeService: FinanceService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.userService.getSession('user');
     this.paymentForm = this.formBuilder.group({ paymentAmount: ['', Validators.required]});
     this.viewDues();
   }
@@ -29,9 +29,9 @@ export class PayBillComponent implements OnInit {
     this.financeService.viewDues(this.user).subscribe(resp => {
       this.due = <Number>resp.json();
     });
+
   }
   onsubmit(){
-    this.submitted=true;
 this.payment.paymentAmount=this.paymentForm.value.paymentAmount;
 this.payment.id=this.user.id;
     this.financeService.postPayment(this.payment).subscribe(resp => {
