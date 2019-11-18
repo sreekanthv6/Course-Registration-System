@@ -16,6 +16,7 @@ import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.util.SwapCourse;
 import com.unt.registration.util.User;
 
 @Service
@@ -25,6 +26,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 	RegistrationDaoImpl registrationDaoImpl;
 	@Autowired
 	JavaMailSender javaMailSender;
+	
+	EnrollObject enrollObject;
 
 	@Override
 	public User userValidate(String id, String password) {
@@ -194,6 +197,26 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return 0;
 		}
 		return 2;
+	}
+
+	@Override
+	public int swapCourse(SwapCourse swapCourse) {
+		// TODO Auto-generated method stub
+		enrollObject.setUserId(swapCourse.getUser().getId());
+		enrollObject.setCourseId(swapCourse.getOldCourse().getCourseId());
+		registrationDaoImpl.dropCourse(enrollObject);
+		enrollObject.setCourseId(swapCourse.getNewCourse().getCourseId());
+		registrationDaoImpl.enroll(enrollObject);
+		
+		
+		return 0;
+	}
+
+	@Override
+	public List<Course> fetchAvailableCourses(Course course) {
+		// TODO Auto-generated method stub
+		
+		return null;
 	}
 
 }

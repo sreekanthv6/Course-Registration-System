@@ -19,6 +19,7 @@ import com.unt.registration.util.Enrollment;
 import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.util.SwapCourse;
 import com.unt.registration.dao.RegistrationDaoImpl;
 import com.unt.registration.service.RegistrationServiceImpl;
 import com.unt.registration.util.User;
@@ -82,8 +83,8 @@ public class RegistrationController {
 	}
 	@PostMapping(path = "/swap", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public List<Course> swap(@RequestBody User user) {
-		return registrationServiceImpl.fetchEnrolledCourses(user);
+	public int swap(@RequestBody SwapCourse swapCourse) {
+		return registrationServiceImpl.swapCourse(swapCourse);
 	}
 	@PostMapping(path = "/postPayment", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })

@@ -299,4 +299,10 @@ public class RegistrationDaoImpl implements RegistrationDao {
 					
 		return jdbcTemplate.query(sql,new Object[] { user.getDeptId(), user.getId() }, new BeanPropertyRowMapper<Course>(Course.class));
 	}
+
+	@Override
+	public List<Course> fetchAvailableCourses(Course course) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -36,4 +36,5 @@ public interface RegistrationDao {
 	public float totalAmount(Payment payment);
 	public List<Course> mandatoryCoursesNotDone(User user);
 	public List<Course> mandatoryCoursesDone(User user);
+	public List<Course> fetchAvailableCourses(Course course);
 }

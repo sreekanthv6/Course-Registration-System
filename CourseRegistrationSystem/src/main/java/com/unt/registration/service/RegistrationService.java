@@ -7,6 +7,7 @@ import com.unt.registration.util.Department;
 import com.unt.registration.util.EnrollObject;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.util.SwapCourse;
 import com.unt.registration.util.User;
 
 public interface RegistrationService {
@@ -23,5 +24,7 @@ public interface RegistrationService {
 	public float viewDues(Payment payment);
 	public void sendEmailForPayment(Payment payment);
 	public int postPayment(Payment payment);
+	public int swapCourse(SwapCourse swapCourse);
+	public List<Course> fetchAvailableCourses(Course course);
 	
 }
