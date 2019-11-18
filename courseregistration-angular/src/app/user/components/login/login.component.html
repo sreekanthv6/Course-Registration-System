@@ -5,102 +5,121 @@
     <title>Course Registration System</title>
 </head>
 <style>
-        input[type=text], select {
-          width: 100%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          display: inline-block;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-        input[type=password] {
-          width: 100%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          display: inline-block;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-        
-        input[type=submit] {
-          width: 100%;
-          background-color: #4CAF50;
-          color: white;
-          padding: 14px 20px;
-          margin: 8px 0;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-        
-        input[type=submit]:hover {
-          background-color: #45a049;
-        }
-        
-        div {
-          border-radius: 5px;
-          background-color: #f2f2f2;
-          padding: 20px;
-        }
-        </style>
-<body>
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
+    input[type=text],
+    select {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=password] {
+        width: 75%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid green;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type=password]:focus {
+    background-color: rgb(49, 189, 30);
+  }
+
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: 1px solid green;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+    h4{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    
+
+    button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 345px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
+
+    
+</style>
+
+<body class="body">
+    <img src="assets/images/education.jpg" alt="img">
+    <div class="box">
+        <form [formGroup]="loginForm" class="login100-form" (ngSubmit)="onSubmit()">
+            
+
+            <div class="main" >
+                <h4 >User Login</h4>
+                <span class="symbol-input100">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span> &nbsp;
+                <input type="text" formControlName="id" class=" input100 form-control" placeholder="Student ID"
+                    [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
+                <span class="focus-input100"></span>
+
+                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                    <div *ngIf="f.id.errors.required">Student ID is required</div>
                 </div>
-                <form [formGroup]="loginForm" class="login100-form" (ngSubmit)="onSubmit()">
-                        <span class="login100-form-title">
-                                User Login
-                            </span>
-                    <div class="wrap-input100 form-group">
-                            <span class="symbol-input100">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
-                                </span>
-                        <input type="text" formControlName="id" class=" input100 form-control" placeholder="Student ID"
-                            [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
-                            <span class="focus-input100"></span>
-						
-                        <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
-                            <div *ngIf="f.id.errors.required">Student ID is required</div>
-                        </div>
-                    </div>
-                    <div class="wrap-input100 form-group">
-                            <span class="symbol-input100">
-                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                </span>
-                        <input type="password" formControlName="password" class="input100 form-control" placeholder="Password"
-                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                            <span class="focus-input100"></span>
-						
-                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                            <div *ngIf="f.password.errors.required">Password is required</div>
-                            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-                        </div>
-                    </div>
-                    <div class="container-login100-form-btn form-group">
-                        <button type="submit" [disabled]="loading" class="login100-form-btn btn btn-primary">Login</button>
-                     
-                    </div>
-                    <div class="text-center p-t-12">
-                            <span class="txt1">
-                                Forgot
-                            </span>
-                            <a class="txt2" [routerLink]="['/resetPassword']">
-                                Username / Password?
-                            </a>
-                        </div>    
-                        <div class="text-center p-t-12">
-                            <a class="txt2" [routerLink]="['/signup']">
-                                Create your Account
-                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                            </a>
-                        </div> 
-                </form>
+                <br>
+                <span class="symbol-input100">
+                    <i class="fa fa-lock" aria-hidden="true"></i>
+                </span>
+                &nbsp;
+                <input type="password" formControlName="password" class="input100 form-control" placeholder="Password"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <span class="focus-input100"></span>
+
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+
+                <br> &nbsp; &nbsp; &nbsp;
+                <button type="submit" [disabled]="loading" class="login100-form-btn btn btn-primary">Login</button>
+                <br>
+                <br>
+                <span class="txt1">
+                    Forgot
+                </span>
+                <a class="txt2" [routerLink]="['/resetPassword']">
+                    Username / Password?
+                </a>
+                <br>
+                <br>
+                <a class="txt2" [routerLink]="['/signup']">
+                    Create your Account
+                    <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                </a>
             </div>
-        </div>
+        </form>
+
     </div>
 </body>
 

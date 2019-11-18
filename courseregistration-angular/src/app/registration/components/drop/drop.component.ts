@@ -4,6 +4,7 @@ import { RegistrationService } from '../../services/registration.service';
 import { Course } from '../../model/course';
 import { User } from 'src/app/user/model/user';
 import { EnrollObject } from '../../model/enroll-object';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-drop',
@@ -14,10 +15,10 @@ export class DropComponent implements OnInit {
   enrolledcourses: Array<Course>;
   user: User;
   enrollObject: EnrollObject= new EnrollObject();
-  constructor(private registrationService: RegistrationService, private router: Router) { }
+  constructor(private registrationService: RegistrationService, private router: Router,private userService: UserService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = this.userService.getSession('user');
     this.registrationService.fetchEnrolledCourses(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
       this.enrolledcourses=flag;
