@@ -1,6 +1,11 @@
 package com.unt.registration.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
@@ -94,13 +99,38 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public String enroll(EnrollObject enrollObject) {
+	public int enroll(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
-		if(registrationDaoImpl.enroll(enrollObject)=="Enrolled") {
+		if (registrationDaoImpl.enroll(enrollObject) > 0
+				&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0) {
 			sendEmail(enrollObject, 1);
-			return "Enrolled";
+			return 1;
 		}
-		return registrationDaoImpl.enroll(enrollObject);
+
+		if (registrationDaoImpl.ifPrerequisitesExist(enrollObject.getCourseId()) == 0) {
+			if (registrationDaoImpl.checkStrength(enrollObject.getCourseId()) > 0) {
+				if (registrationDaoImpl.enroll(enrollObject) > 0
+						&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0)
+					return 1;
+				else
+					return 0;
+			} else
+				return 2;
+		} else {
+			if (registrationDaoImpl.checkPrerequisites(enrollObject.getUserId(),
+					registrationDaoImpl.getPrerequisites(enrollObject.getCourseId())) > 0) {
+				if (registrationDaoImpl.checkStrength(enrollObject.getCourseId()) > 0) {
+					if (registrationDaoImpl.enroll(enrollObject) > 0
+							&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0)
+						return 1;
+					else
+						return 0;
+				} else
+					return 2;
+			} else
+				return 4;
+		}
+
 	}
 
 	@Override
@@ -113,8 +143,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public boolean dropCourse(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
 
-		if (registrationDaoImpl.dropCourse(enrollObject)) {
-			sendEmail(enrollObject,1);
+		if (registrationDaoImpl.dropCourse(enrollObject) > 0
+				&& registrationDaoImpl.decreaseStrength(enrollObject.getCourseId()) > 0) {
+			sendEmail(enrollObject, 1);
 			return true;
 		}
 		return false;
@@ -138,8 +169,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			if (value == 0) {
 				helper.setSubject("Notification for dropping");
 				helper.setText("<h3>Dropped Course  " + course.getCourseName() + "Successfully!</h3>", true);
-			}
-			else {
+			} else {
 				helper.setSubject("Notification for Enrolling");
 				helper.setText("<h3>Enrolled Course  " + course.getCourseName() + "Successfully!</h3>", true);
 			}
@@ -156,16 +186,15 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public float viewDues(Payment payment) {
 		// TODO Auto-generated method stub
-		float pastPaymentsAmount=registrationDaoImpl.pastPaymentsAmount(payment);
-		float totalAmount=registrationDaoImpl.totalAmount(payment);
-		return totalAmount-pastPaymentsAmount;
-		
-		
+		float pastPaymentsAmount = registrationDaoImpl.pastPaymentsAmount(payment);
+		float totalAmount = registrationDaoImpl.totalAmount(payment);
+		return totalAmount - pastPaymentsAmount;
+
 	}
+
 	@Override
 	public void sendEmailForPayment(Payment payment) {
 		String emailId;
-		Course course;
 
 		try {
 
@@ -175,10 +204,9 @@ public class RegistrationServiceImpl implements RegistrationService {
 			emailId = registrationDaoImpl.getEmail(payment.getId());
 
 			helper.setTo(emailId);
-			
-				helper.setSubject("Notification for Payment");
-				helper.setText("<h3>Payment  " + payment.getPaymentAmount() + "$ received Successfully!</h3>", true);
-			
+
+			helper.setSubject("Notification for Payment");
+			helper.setText("<h3>Payment  " + payment.getPaymentAmount() + "$ received Successfully!</h3>", true);
 
 			javaMailSender.send(msg);
 
@@ -191,12 +219,21 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public int postPayment(Payment payment) {
 		// TODO Auto-generated method stub
-		if(registrationDaoImpl.postPayment(payment)==0)
-		{
-			this.sendEmailForPayment(payment);
-			return 0;
+		float due = registrationDaoImpl.totalAmount(payment) - registrationDaoImpl.pastPaymentsAmount(payment);
+		if (due > 0) {
+			Date date = Calendar.getInstance().getTime();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+			String strDate = dateFormat.format(date);
+			Random rand = new Random();
+			int randomId = rand.nextInt(1000000);
+			String paymentId = String.valueOf(randomId);
+			if (registrationDaoImpl.postPayment(payment, paymentId, strDate) == 1) {
+				this.sendEmailForPayment(payment);
+				return 0;
+			}
+			return 2;
 		}
-		return 2;
+		return 1;
 	}
 
 	@Override
@@ -219,4 +256,5 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return null;
 	}
 
+}
 }

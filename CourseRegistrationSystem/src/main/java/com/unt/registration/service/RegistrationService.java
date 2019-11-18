@@ -17,7 +17,7 @@ public interface RegistrationService {
 	public String resetPassword(User user);
 	public List<Course> getCourses(SelectCriteria selectCriteria);
 	public Course findCourse(String courseId);
-	public String enroll(EnrollObject enrollObject);
+	public int enroll(EnrollObject enrollObject);
 	public List<Course> fetchEnrolledCourses(User user);
 	public boolean dropCourse(EnrollObject enrollObject);
 	public boolean sendEmail(EnrollObject enrollObject, int value);

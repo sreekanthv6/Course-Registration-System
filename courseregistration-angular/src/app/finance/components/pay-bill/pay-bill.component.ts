@@ -24,10 +24,12 @@ export class PayBillComponent implements OnInit {
     this.paymentForm = this.formBuilder.group({ paymentAmount: ['', Validators.required]});
     this.viewDues();
   }
+  get f() { return this.paymentForm.controls; }
   viewDues() {
     this.financeService.viewDues(this.user).subscribe(resp => {
       this.due = <Number>resp.json();
     });
+
   }
   onsubmit(){
 this.payment.paymentAmount=this.paymentForm.value.paymentAmount;

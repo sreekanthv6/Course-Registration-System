@@ -127,83 +127,48 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public boolean dropCourse(EnrollObject enrollObject) {
+	public int dropCourse(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM \"Registration DB\".\"Enrollments\" WHERE id = '" + enrollObject.getUserId()
 				+ "' AND \"courseId\" = '" + enrollObject.getCourseId() + "' and semester='" + this.getCurrentSemester()
 				+ "'AND year=" + Calendar.getInstance().get(Calendar.YEAR);
-		int rows = jdbcTemplate.update(sql);
-		boolean strength = decreaseStrength(enrollObject.getCourseId());
-		if (rows > 0 && strength) {
-			return true;
-
-		} else
-			return false;
+		return jdbcTemplate.update(sql);
 	}
 
 	@Override
-	public boolean decreaseStrength(String id) {
+	public int decreaseStrength(String id) {
 		String sql = "update \"Registration DB\".\"Courses\" set strength = strength-1 where \"courseId\"='" + id
 				+ "' and semester='" + this.getCurrentSemester() + "'AND year="
 				+ Calendar.getInstance().get(Calendar.YEAR);
-		int rows = jdbcTemplate.update(sql);
-		if (rows > 0)
-			return true;
-		else
-			return false;
-
+		return jdbcTemplate.update(sql);
 	}
 
 	public int checkStrength(String courseId) {
-		String sql = "SELECT count(*)   FROM \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"Strength\"  < \"Registration DB\".\"Courses\".\"CourseMaxStrength\" AND \"Registration DB\".\"Courses\".\"CourseID\"='"
+		String sql = "SELECT count(*)   FROM \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"strength\"  < \"Registration DB\".\"Courses\".\"CourseMaxStrength\" AND \"Registration DB\".\"Courses\".\"CourseID\"='"
 				+ courseId + "'";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 
 	@Override
-	public boolean increaseStrength(String id) {
-		String sql = "update \"Registration DB\".\"Courses\" set strength = strength+1 where \"courseID\"='" + id + "'";
-		int rows = jdbcTemplate.update(sql);
-		if (rows > 0)
-			return true;
-		else
-			return false;
+	public int increaseStrength(String id) {
+		String sql = "update \"Registration DB\".\"Courses\" set strength = strength+1 where \"courseId\"='" + id + "'";
+		return jdbcTemplate.update(sql);
 
 	}
 
 	@Override
-	public String enroll(EnrollObject enrollObject) {
+	public int enroll(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
-		int i;
-		String id = getPrerequisites(enrollObject.getCourseId());
-		if (id != "empty") {
-			i = checkPrerequisites(enrollObject.getUserId(), id);
-		} else
-			i = 1;
-		if (i > 0) {
-			int checkStrength = checkStrength(enrollObject.getCourseId());
-			if (checkStrength > 0) {
 				String sql = "INSERT INTO  \"Registration DB\".\"Enrollments\" values(?,?,?,?,?)";
 				Object[] args = { enrollObject.getUserId(), enrollObject.getCourseId(), this.getCurrentSemester(),
 						Calendar.getInstance().get(Calendar.YEAR), null };
 				int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC, Types.CHAR };
-				if (jdbcTemplate.update(sql, args, argTypes) == 1) {
-					increaseStrength(enrollObject.getUserId());
-					return "Enrolled";
-				} else
-					return "NotEnrolled";
-			}
-
-			else
-				return "StrengthFull";
-		} else
-
-			return "NoPrerequisites";
+				return jdbcTemplate.update(sql, args, argTypes);
+					
 	}
 
 	@Override
 	public int checkPrerequisites(String userId, String courseId) {
-//		String id=getPrerequisites(courseId);
 		String sql = "SELECT COUNT(*) FROM \"Registration DB\".\"Enrollments\" where id='" + userId
 				+ "' AND \"courseId\"='" + courseId + "' AND grade!=null";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
@@ -211,39 +176,30 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public String getPrerequisites(String id) {
+	public String getPrerequisites(String courseId) {
 		// TODO Auto-generated method stub
-		String sql = "SELECT \"prerequisiteId\" FROM \"Registration DB\".\"Prerequisites\" where \"courseId\"='" + id
+		String sql = "SELECT \"prerequisiteId\" FROM \"Registration DB\".\"Prerequisites\" where \"courseId\"='" + courseId
 				+ "'";
-		if (jdbcTemplate.queryForObject(sql, String.class) != null)
 			return jdbcTemplate.queryForObject(sql, String.class);
-		else
-			return "empty";
+
+	}
+	@Override
+	public int ifPrerequisitesExist(String courseId) {
+		// TODO Auto-generated method stub
+		String sql = "SELECT count(*) FROM \"Registration DB\".\"Prerequisites\" where \"courseId\"='" + courseId
+				+ "'";
+		return jdbcTemplate.queryForObject(sql, Integer.class);
 
 	}
 
 	@Override
-	public int postPayment(Payment payment) {
+	public int postPayment(Payment payment, String paymentId, String strDate) {
 		// TODO Auto-generated method stub
-		float due=this.totalAmount(payment)-this.pastPaymentsAmount(payment);
-		if(due>0) {
-			Date date = Calendar.getInstance().getTime();  
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-            String strDate = dateFormat.format(date);
-            Random rand = new Random();  
-            int randomId= rand.nextInt(1000000); 
-            String paymentId=String.valueOf(randomId);
 		String sql = "INSERT INTO \"Registration DB\".\"Payments\" values(?,?,?,?)";
 		Object[] args = { payment.getId(), paymentId, strDate,
 				payment.getPaymentAmount() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC };
-		if (jdbcTemplate.update(sql, args, argTypes) == 1)
-		{
-			return 0;
-		}
-		return 2;
-		}
-		return 1;
+		return jdbcTemplate.update(sql, args, argTypes);
 	}
 	@Override
 	public List<Payment> pastPayments(User user) {

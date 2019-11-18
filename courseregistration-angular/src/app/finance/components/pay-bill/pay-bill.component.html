@@ -37,9 +37,14 @@
              <tr>
                 <td>Enter Amount</td >
                 <td>
-                  <input type="number" required formControlName="paymentAmount" name="paymentAmount"/>
+                  <input type="number" required formControlName="paymentAmount" name="paymentAmount" [ngClass]="{ 'is-invalid': submitted && f.paymentAmount.errors }"/>
                 </td>
+
               </tr>
+              <div *ngIf="submitted && f.paymentAmount.errors" class="invalid-feedback">
+              <tr *ngIf="f.paymentAmount.errors.required">Student ID is required
+              </tr>
+            </div>
            </table>
           </div>
            <div>
