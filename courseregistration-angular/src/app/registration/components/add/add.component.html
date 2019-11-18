@@ -4,21 +4,59 @@
 <head>
     <title>Course Registration System</title>
 </head>
+<style>
+    * html {
+        font: Arial;
+    }
+
+    th {
+
+        background: green;
+    }
+
+    td {
+
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #eee;
+    }
+
+    table tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    select {
+        color: #ffffff;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+    }
+</style>
 
 <body>
-  <select class="dropdown" required formControlName="deptName" name="deptName"
-[ngClass]="{ 'is-invalid': (submitted&&f.deptName.errors) || (f.deptName.touched && f.deptName.errors) }">
-<span class="focus-input100"></span>
-<option value='' selected>Department</option>
-<option *ngFor="let dept of departments" value={{dept.deptName}}>
-    {{dept.deptName}}
-</option>
-</select>
-<select class="dropdown" required formControlName="deptName" name="deptName"
-[ngClass]="{ 'is-invalid': (submitted&&f.deptName.errors) || (f.deptName.touched && f.deptName.errors) }">
-<span class="focus-input100"></span>
-<option value='' selected>Department</option>
-<option *ngFor="let dept of departments" value={{dept.deptName}}>
-    {{dept.deptName}}
-</option>
-</select>
+    <table border="1px">
+        <tr>
+            <td>
+                <select required formControlName="deptName" name="deptName"
+                    [ngClass]="{ 'is-invalid': (submitted&&f.deptName.errors) || (f.deptName.touched && f.deptName.errors) }">
+
+                    <option value='' selected>Department</option>
+                    <option *ngFor="let dept of departments" value={{dept.deptName}}>
+                        {{dept.deptName}}
+                    </option>
+                </select></td>
+        </tr>
+        <tr><td>
+            <select class="dropdown" required formControlName="deptName" name="deptName"
+                [ngClass]="{ 'is-invalid': (submitted&&f.deptName.errors) || (f.deptName.touched && f.deptName.errors) }">
+                <span class="focus-input100"></span>
+                <option value='' selected>Department</option>
+                <option *ngFor="let dept of departments" value={{dept.deptName}}>
+                    {{dept.deptName}}
+                </option>
+            </select></td>
+        </tr>
+    </table>

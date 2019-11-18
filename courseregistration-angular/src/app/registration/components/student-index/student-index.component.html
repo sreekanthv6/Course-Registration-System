@@ -4,51 +4,14 @@
 <head>
     <title>Course Registration System</title>
 </head>
-<style>
-    body {
-      font-family: "Lato", sans-serif;
-    }
-    
-    .container {
-      height: 100%;
-      width: 200px;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #111;
-      overflow-x: hidden;
-      padding-top: 20px;
-    }
-    
-    .container a {
-      padding: 6px 6px 6px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: #818181;
-      display: block;
-    }
-    
-    .container a:hover {
-      color: #f1f1f1;
-    }
-    
-    .main {
-      margin-left: 200px; /* Same as the width of the sidenav */
-    }
-    
-    @media screen and (max-height: 450px) {
-      .sidenav {padding-top: 15px;}
-      .sidenav a {font-size: 18px;}
-    }
-    </style>
+
 <body>
     <!--hfjfhkj-->
         <div class="container">
             <div id="menu">
                 <ul>
                     <li><a [routerLink]="['/search']">Search</a></li>
-                    <li><a href="">Enroll</a>
+                    <li><a>Enroll</a>
                         <ul>
                             <li><a [routerLink]="['/select-criteria']">Add</a></li>
                             <li><a [routerLink]="['/drop']">Drop</a></li>
@@ -58,7 +21,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a href="#">My Classes</a> <ul>
+                    <li><a>My Classes</a> <ul>
 <li><a [routerLink]="['/schedule']">Class Schedule</a></li>
                             <li><a [routerLink]="['/grades']">View Grades</a></li>
                             <li><a [routerLink]="['/mandatory']">Mandatory Courses</a></li>
@@ -66,7 +29,7 @@
 </ul>
                            
                             </li>
-                    <li><a href="#">Finance</a>
+                    <li><a>Finance</a>
 <ul>
                             <li><a [routerLink]="['/pay']">Make Payment</a></li>
                             <li><a [routerLink]="['/history']">Past Payments</a></li>
@@ -85,6 +48,6 @@
 </div>
             </div>
         </div>
-        <div>Welcome</div>
+        <div class="message"><h3>Welcome &nbsp;{{user.firstName}}</h3></div>
     </body>
 </html>
