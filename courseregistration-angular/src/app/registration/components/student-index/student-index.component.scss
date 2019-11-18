@@ -11,16 +11,16 @@ border: 1px solid white;
 position: right;
 }
 
-.container{
-    width: 1220px;
-	text-align:center;
-	position: relative;
+// .container{
+//     width: 1220px;
+// 	text-align:center;
+// 	position: relative;
 
-  left: 50%;
-  transform: translate(-50%, -50%);
+//   left: 50%;
+//   transform: translate(-50%, -50%);
 	
 	
-}
+// }
 
 .degree{
 	
@@ -34,36 +34,36 @@ position: right;
 	font-size: 28px;
 }
 
-#menu ul{
-    list-style: none;    
-}
-#menu ul li{
-    background-color: green;
-    border: 1px solid white;
-    width: 120px;
-    height: 35px;
+// #menu ul{
+//     list-style: none;    
+// }
+// #menu ul li{
+//     background-color: green;
+//     border: 1px solid white;
+//     width: 120px;
+//     height: 35px;
 	
-    text-align: center;
-    line-height: 35px;
-    float:left;
-    position: relative;
-}
-#menu li a{
-    text-decoration: gray;
-    color:white;
-    display: block;
-}
-#menu ul li a:hover {
-    background-color: black;    
-}
-#menu ul ul{
-    position: absolute;
-    display: none;
-}
-#menu ul li:hover>ul{
-    display: block;
-}
-#menu ul ul ul{
-    margin-left: 120px;
-    top:0px;
-}
+//     text-align: center;
+//     line-height: 35px;
+//     float:left;
+//     position: relative;
+// }
+// #menu li a{
+//     text-decoration: gray;
+//     color:white;
+//     display: block;
+// }
+// #menu ul li a:hover {
+//     background-color: black;    
+// }
+// #menu ul ul{
+//     position: absolute;
+//     display: none;
+// }
+// #menu ul li:hover>ul{
+//     display: block;
+// }
+// #menu ul ul ul{
+//     margin-left: 120px;
+//     top:0px;
+// }

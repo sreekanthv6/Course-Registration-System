@@ -23,19 +23,19 @@
      background-color: #fff;
    }
    </style>
-<body>
+<body class="box">
         <form [formGroup]="paymentForm" (ngSubmit)="onsubmit()">
           <span>
             Payment
           </span>
-          <div>
+          <div >
            <table >
              <tr>
                <td>Total Due:</td>
                <td>{{due}}$</td>
              </tr>
              <tr>
-                <td>Enter Amount</td>
+                <td>Enter Amount</td >
                 <td>
                   <input type="number" required formControlName="paymentAmount" name="paymentAmount"/>
                 </td>
