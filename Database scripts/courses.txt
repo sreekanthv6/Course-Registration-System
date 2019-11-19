@@ -1,0 +1,45 @@
+-- Table: "Registration DB"."Courses"
+
+-- DROP TABLE "Registration DB"."Courses";
+
+CREATE TABLE "Registration DB"."Courses"
+(
+    "courseId" character varying COLLATE pg_catalog."default" NOT NULL,
+    "courseName" character varying COLLATE pg_catalog."default" NOT NULL,
+    "deptId" character varying COLLATE pg_catalog."default" NOT NULL,
+    semester character varying COLLATE pg_catalog."default" NOT NULL,
+    year numeric(4,0) NOT NULL,
+    "isActive" boolean NOT NULL,
+    amount numeric,
+    "isMandatory" boolean NOT NULL,
+    strength numeric(3,0),
+    degree character varying(2) COLLATE pg_catalog."default" NOT NULL,
+    professor character varying COLLATE pg_catalog."default",
+    "courseMaxStrength" numeric(3,0),
+    "courseTimings" character varying COLLATE pg_catalog."default",
+    days character varying COLLATE pg_catalog."default",
+    "startDate" character varying COLLATE pg_catalog."default",
+    "endDate" character varying COLLATE pg_catalog."default",
+    CONSTRAINT "Courses_CourseID_key" UNIQUE ("courseId")
+,
+    CONSTRAINT "Courses_fkey" FOREIGN KEY ("deptId")
+        REFERENCES "Registration DB"."Departments" ("deptId") MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Courses"
+    OWNER to postgres;
+
+-- Index: fki_Courses_fkey
+
+-- DROP INDEX "Registration DB"."fki_Courses_fkey";
+
+CREATE INDEX "fki_Courses_fkey"
+    ON "Registration DB"."Courses" USING btree
+    ("deptId" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;

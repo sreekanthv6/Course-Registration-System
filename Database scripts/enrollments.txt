@@ -1,0 +1,46 @@
+-- Table: "Registration DB"."Enrollments"
+
+-- DROP TABLE "Registration DB"."Enrollments";
+
+CREATE TABLE "Registration DB"."Enrollments"
+(
+    id character varying COLLATE pg_catalog."default" NOT NULL,
+    "courseId" character varying COLLATE pg_catalog."default" NOT NULL,
+    semester character varying COLLATE pg_catalog."default" NOT NULL,
+    year numeric(4,0) NOT NULL,
+    grade "char",
+    CONSTRAINT "Enrollments_pkey" PRIMARY KEY (id, "courseId", semester, year),
+    CONSTRAINT "Enrollments_courseid_fkey" FOREIGN KEY ("courseId")
+        REFERENCES "Registration DB"."Courses" ("courseId") MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT "Enrollments_id_fkey" FOREIGN KEY (id)
+        REFERENCES "Registration DB"."Userdetails" (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Enrollments"
+    OWNER to postgres;
+
+-- Index: fki_Enrollments.fkey
+
+-- DROP INDEX "Registration DB"."fki_Enrollments.fkey";
+
+CREATE INDEX "fki_Enrollments.fkey"
+    ON "Registration DB"."Enrollments" USING btree
+    (id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: fki_Enrollments_courseid_fkey
+
+-- DROP INDEX "Registration DB"."fki_Enrollments_courseid_fkey";
+
+CREATE INDEX "fki_Enrollments_courseid_fkey"
+    ON "Registration DB"."Enrollments" USING btree
+    ("courseId" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
