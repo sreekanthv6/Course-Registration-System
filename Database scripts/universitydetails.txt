@@ -1,0 +1,18 @@
+-- Table: "Registration DB"."Universitydetails"
+
+-- DROP TABLE "Registration DB"."Universitydetails";
+
+CREATE TABLE "Registration DB"."Universitydetails"
+(
+    id character varying(5) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Universitydetails_pkey" PRIMARY KEY (id),
+    CONSTRAINT "Universitydetails_ID_key" UNIQUE (id)
+
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Universitydetails"
+    OWNER to postgres;

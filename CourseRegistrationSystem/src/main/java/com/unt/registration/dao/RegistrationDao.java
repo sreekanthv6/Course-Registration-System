@@ -9,6 +9,7 @@ import com.unt.registration.util.Enrollment;
 import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.util.SwapCourse;
 import com.unt.registration.util.User;
 
 public interface RegistrationDao {
@@ -36,6 +37,7 @@ public interface RegistrationDao {
 	public float totalAmount(Payment payment);
 	public List<Course> mandatoryCoursesNotDone(User user);
 	public List<Course> mandatoryCoursesDone(User user);
-	public List<Course> fetchAvailableCourses(Course course);
 	public int ifPrerequisitesExist(String courseId);
+	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
+	public List<Course> fetchNotEnrolledCourses(User user);
 }

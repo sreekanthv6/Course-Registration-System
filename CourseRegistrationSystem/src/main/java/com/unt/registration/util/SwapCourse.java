@@ -1,25 +1,26 @@
 package com.unt.registration.util;
 
 public class SwapCourse {
-	User user;
-	Course oldCourse, newCourse;
-	public User getUser() {
-		return user;
+	String userId;
+	String oldCourseId, newCourseId;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public Course getOldCourse() {
-		return oldCourse;
+	public String getOldCourseId() {
+		return oldCourseId;
 	}
-	public void setOldCourse(Course oldCourse) {
-		this.oldCourse = oldCourse;
+	public void setOldCourseId(String oldCourseId) {
+		this.oldCourseId = oldCourseId;
 	}
-	public Course getNewCourse() {
-		return newCourse;
+	public String getNewCourseId() {
+		return newCourseId;
 	}
-	public void setNewCourse(Course newCourse) {
-		this.newCourse = newCourse;
+	public void setNewCourseId(String newCourseId) {
+		this.newCourseId = newCourseId;
 	}
+	
 
 }

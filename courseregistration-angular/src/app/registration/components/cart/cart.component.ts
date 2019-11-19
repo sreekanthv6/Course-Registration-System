@@ -12,7 +12,6 @@ import { EnrollObject } from 'src/app/registration/model/enroll-object';
 })
 export class CartComponent implements OnInit {
   courses: Course[] = [];
-  key: string;
   cartEmpty: Boolean = false;
   user: User;
   enrolled: Number;
@@ -26,7 +25,7 @@ export class CartComponent implements OnInit {
 
   loadCart(): void {
     this.courses = [];
-    let cart: Course[] = JSON.parse(localStorage.getItem(this.key));
+    let cart: Course[] = JSON.parse(sessionStorage.getItem('cart'));
     if (cart == null || cart.length == 0) {
       this.cartEmpty = true;
     }
@@ -39,7 +38,7 @@ export class CartComponent implements OnInit {
 
   removefromcart(courseId: string): void {
 
-    let cart: Course[] = JSON.parse(localStorage.getItem(this.key));
+    let cart: Course[] = JSON.parse(sessionStorage.getItem('cart'));
     //let index: number = -1;
     for (var i = 0; i < cart.length; i++) {
       let course: Course = cart[i];
@@ -48,21 +47,19 @@ export class CartComponent implements OnInit {
         break;
       }
     }
-    localStorage.setItem(this.key, JSON.stringify(cart));
+    sessionStorage.setItem('cart', JSON.stringify(cart));
     this.loadCart();
   }
-  enroll(courseId: String) {
+  enroll(courseId: string) {
     this.enrollObject.userId = this.user.id;
     this.enrollObject.courseId = courseId;
     console.log(JSON.stringify(this.enrollObject));
     this.registrationService.enroll(this.enrollObject).subscribe(resp => {
-      let flag = resp.json(); 
-      console.log(flag);
-      this.enrolled = flag;
-      console.log(this.enrolled);
+      this.enrolled = resp.json(); 
       if (this.enrolled == 1) {
         
         alert("Enrolled Successfully");
+        this.removefromcart(courseId);
       }
       else if (this.enrolled == 4)
         alert("Please make sure you complete course prerequisite");

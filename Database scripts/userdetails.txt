@@ -1,0 +1,46 @@
+-- Table: "Registration DB"."Userdetails"
+
+-- DROP TABLE "Registration DB"."Userdetails";
+
+CREATE TABLE "Registration DB"."Userdetails"
+(
+    id character varying COLLATE pg_catalog."default" NOT NULL,
+    "firstName" character varying COLLATE pg_catalog."default" NOT NULL,
+    "lastName" character varying COLLATE pg_catalog."default" NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    mobile numeric(10,0) NOT NULL,
+    "deptID" character varying COLLATE pg_catalog."default" NOT NULL,
+    role numeric(1,0) NOT NULL,
+    password character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Userdetails_pkey" PRIMARY KEY (id),
+    CONSTRAINT "Userdetails_Email_key" UNIQUE (email)
+,
+    CONSTRAINT "Userdetails_ID_key" UNIQUE (id)
+,
+    CONSTRAINT "Userdetails_Mobile_key" UNIQUE (mobile)
+,
+    CONSTRAINT "Userdetails_ID_fkey" FOREIGN KEY (id)
+        REFERENCES "Registration DB"."Universitydetails" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Userdetails_fkey" FOREIGN KEY ("deptID")
+        REFERENCES "Registration DB"."Departments" ("deptId") MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Userdetails"
+    OWNER to postgres;
+
+-- Index: fki_Userdetails_fkey
+
+-- DROP INDEX "Registration DB"."fki_Userdetails_fkey";
+
+CREATE INDEX "fki_Userdetails_fkey"
+    ON "Registration DB"."Userdetails" USING btree
+    ("deptID" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;

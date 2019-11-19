@@ -31,8 +31,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 	RegistrationDaoImpl registrationDaoImpl;
 	@Autowired
 	JavaMailSender javaMailSender;
-	
-	EnrollObject enrollObject;
 
 	@Override
 	public User userValidate(String id, String password) {
@@ -101,18 +99,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public int enroll(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
-		if (registrationDaoImpl.enroll(enrollObject) > 0
-				&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0) {
-			sendEmail(enrollObject, 1);
-			return 1;
-		}
 
 		if (registrationDaoImpl.ifPrerequisitesExist(enrollObject.getCourseId()) == 0) {
 			if (registrationDaoImpl.checkStrength(enrollObject.getCourseId()) > 0) {
 				if (registrationDaoImpl.enroll(enrollObject) > 0
-						&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0)
+						&& registrationDaoImpl.increaseStrength(enrollObject.getCourseId()) > 0) {
+					sendEmail(enrollObject, 1);
 					return 1;
-				else
+				}else
 					return 0;
 			} else
 				return 2;
@@ -121,7 +115,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 					registrationDaoImpl.getPrerequisites(enrollObject.getCourseId())) > 0) {
 				if (registrationDaoImpl.checkStrength(enrollObject.getCourseId()) > 0) {
 					if (registrationDaoImpl.enroll(enrollObject) > 0
-							&& registrationDaoImpl.increaseStrength(enrollObject.getUserId()) > 0)
+							&& registrationDaoImpl.increaseStrength(enrollObject.getCourseId()) > 0)
 						return 1;
 					else
 						return 0;
@@ -239,21 +233,43 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public int swapCourse(SwapCourse swapCourse) {
 		// TODO Auto-generated method stub
-		enrollObject.setUserId(swapCourse.getUser().getId());
-		enrollObject.setCourseId(swapCourse.getOldCourse().getCourseId());
-		registrationDaoImpl.dropCourse(enrollObject);
-		enrollObject.setCourseId(swapCourse.getNewCourse().getCourseId());
-		registrationDaoImpl.enroll(enrollObject);
+
+		EnrollObject enrollObject=new EnrollObject();
+		enrollObject.setUserId(swapCourse.getUserId());
+		enrollObject.setCourseId(swapCourse.getNewCourseId());
+		System.out.println("new course "+enrollObject.getCourseId());
+		int j=this.enroll(enrollObject);
+		System.out.println("ernoll success "+j);
+		if(j==1) {
+		enrollObject.setCourseId(swapCourse.getOldCourseId());
+		System.out.println("old course "+enrollObject.getCourseId());
+		Boolean i=this.dropCourse(enrollObject);
+		System.out.println("drp success "+i);
+		if(i) 
+		return 1;
 		
-		
-		return 0;
+		else {
+			enrollObject.setCourseId(swapCourse.getNewCourseId());
+			this.dropCourse(enrollObject);
+			return 0;
+		}
+		}
+		else
+			System.out.println(j);
+			return j;
 	}
 
 	@Override
-	public List<Course> fetchAvailableCourses(Course course) {
+	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria) {
 		// TODO Auto-generated method stub
 		
-		return null;
+		return registrationDaoImpl.fetchAvailableCourses(selectCriteria);
+	}
+	@Override
+	public List<Course> fetchNotEnrolledCourses(User user) {
+		// TODO Auto-generated method stub
+		
+		return registrationDaoImpl.fetchNotEnrolledCourses(user);
 	}
 
 }

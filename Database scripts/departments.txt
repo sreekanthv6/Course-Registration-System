@@ -1,0 +1,20 @@
+-- Table: "Registration DB"."Departments"
+
+-- DROP TABLE "Registration DB"."Departments";
+
+CREATE TABLE "Registration DB"."Departments"
+(
+    "deptId" character varying COLLATE pg_catalog."default" NOT NULL,
+    "deptName" character varying COLLATE pg_catalog."default" NOT NULL,
+    building character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Departments_pkey" PRIMARY KEY ("deptId"),
+    CONSTRAINT "Departments_DeptID_key" UNIQUE ("deptId")
+
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Departments"
+    OWNER to postgres;
