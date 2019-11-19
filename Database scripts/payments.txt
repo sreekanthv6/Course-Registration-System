@@ -1,0 +1,23 @@
+-- Table: "Registration DB"."Payments"
+
+-- DROP TABLE "Registration DB"."Payments";
+
+CREATE TABLE "Registration DB"."Payments"
+(
+    id character varying COLLATE pg_catalog."default" NOT NULL,
+    "paymentId" character varying COLLATE pg_catalog."default" NOT NULL,
+    "paymentDate" character varying COLLATE pg_catalog."default" NOT NULL,
+    "paymentAmount" numeric(4,0) NOT NULL,
+    CONSTRAINT "Payments_pkey" PRIMARY KEY ("paymentId"),
+    CONSTRAINT constraint_name FOREIGN KEY (id)
+        REFERENCES "Registration DB"."Userdetails" (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE "Registration DB"."Payments"
+    OWNER to postgres;

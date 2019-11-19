@@ -1,0 +1,6 @@
+-- SCHEMA: Registration DB
+
+-- DROP SCHEMA "Registration DB" ;
+
+CREATE SCHEMA "Registration DB"
+    AUTHORIZATION postgres;
