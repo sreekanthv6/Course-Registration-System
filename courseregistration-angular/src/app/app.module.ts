@@ -10,11 +10,12 @@ import { RegistrationModule } from './registration/registration.module';
 import { SearchModule } from './search/search.module';
 import { MyclassesModule } from './myclasses/myclasses.module';
 import { FinanceModule } from './finance/finance.module';
+import { ContactUsComponent } from './finance/components/contact-us/contact-us.component';
 //import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
