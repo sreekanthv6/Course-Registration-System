@@ -5,6 +5,8 @@ import { Course } from '../../model/course';
 import { UserService } from '../../../user/services/user.service';
 import { RegistrationService } from '../../services/registration.service';
 import { Router } from '@angular/router';
+import { User } from 'bin/src/app/user/model/user';
+import { SelectCriteria } from '../../model/select-criteria';
 @Component({
   selector: 'app-select-criteria',
   templateUrl: './select-criteria.component.html',
@@ -18,21 +20,26 @@ export class SelectCriteriaComponent implements OnInit {
   form: Boolean = true;
   displayCourses = false;
   courses: Array<Course>;
-  key: string;
+  user: User;
+  selectCriteria: SelectCriteria = new SelectCriteria();
   constructor(private formBuilder: FormBuilder, private userService: UserService, private registrationService: RegistrationService, private router: Router) { }
 
   ngOnInit() {
     this.selectCriteriaForm = this.formBuilder.group({ degree: ['', Validators.required], deptId: ['', Validators.required] });
     this.fetchDepartments();
-    
-    localStorage.removeItem(this.key);
+    this.user=this.userService.getSession('user');
+   // sessionStorage.removeItem('cart');
   }
   get f() { return this.selectCriteriaForm.controls; }
   onSubmit() {
     this.submitted = true;
+    this.selectCriteria.degree=this.selectCriteriaForm.value.degree;
+    this.selectCriteria.userId=this.user.id;
+    this.selectCriteria.deptId=this.selectCriteriaForm.value.deptId;
+    console.log(this.selectCriteria.degree+" "+this.selectCriteria.userId+" "+this.selectCriteria.deptId);
     if (this.selectCriteriaForm.invalid)
       return;
-    this.registrationService.getCourses(this.selectCriteriaForm.value).subscribe(resp => {
+    this.registrationService.fetchAvailableCourses(this.selectCriteria).subscribe(resp => {
       this.form = false;
       this.displayCourses = true;
       this.courses = <Course[]>resp.json();
@@ -43,18 +50,18 @@ export class SelectCriteriaComponent implements OnInit {
       console.log("course id is " + courseId);
       this.registrationService.find(courseId).subscribe(resp => {
         let course: Course = <Course>resp.json();
-        if (localStorage.getItem(this.key) === null) {
-          console.log("i am here " + localStorage.getItem(this.key));
+        if (sessionStorage.getItem('cart') === null) {
+          console.log("i am here " + sessionStorage.getItem('cart'));
           let cart: Course[] = [];
           if (cart.push(course)) {
             course.isAddedtoCart = true;
           }
           else
             alert("error");
-          localStorage.setItem(this.key, JSON.stringify(cart));
+            sessionStorage.setItem('cart', JSON.stringify(cart));
         }
         else {
-          let cart: Course[] = JSON.parse(localStorage.getItem(this.key));
+          let cart: Course[] = JSON.parse(sessionStorage.getItem('cart'));
           let index: number = -1;
           for (var i = 0; i < cart.length; i++) {
             let course: Course = cart[i];
@@ -71,7 +78,7 @@ export class SelectCriteriaComponent implements OnInit {
             }
             else
               alert("error");
-            localStorage.setItem(this.key, JSON.stringify(cart));
+              sessionStorage.setItem('cart', JSON.stringify(cart));
           }
           else
             alert("course already added to cart");

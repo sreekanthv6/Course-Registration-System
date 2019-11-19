@@ -21,6 +21,7 @@ import com.unt.registration.util.Enrollment;
 import com.unt.registration.util.Grade;
 import com.unt.registration.util.Payment;
 import com.unt.registration.util.SelectCriteria;
+import com.unt.registration.util.SwapCourse;
 import com.unt.registration.util.User;
 
 @Repository
@@ -144,14 +145,14 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	public int checkStrength(String courseId) {
-		String sql = "SELECT count(*)   FROM \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"strength\"  < \"Registration DB\".\"Courses\".\"CourseMaxStrength\" AND \"Registration DB\".\"Courses\".\"CourseID\"='"
+		String sql = "SELECT count(*)   FROM \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"strength\"  < \"Registration DB\".\"Courses\".\"courseMaxStrength\" AND \"Registration DB\".\"Courses\".\"courseId\"='"
 				+ courseId + "'";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 
 	@Override
-	public int increaseStrength(String id) {
-		String sql = "update \"Registration DB\".\"Courses\" set strength = strength+1 where \"courseId\"='" + id + "'";
+	public int increaseStrength(String courseId) {
+		String sql = "update \"Registration DB\".\"Courses\" set strength = strength+1 where \"courseId\"='" + courseId + "'";
 		return jdbcTemplate.update(sql);
 
 	}
@@ -170,7 +171,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Override
 	public int checkPrerequisites(String userId, String courseId) {
 		String sql = "SELECT COUNT(*) FROM \"Registration DB\".\"Enrollments\" where id='" + userId
-				+ "' AND \"courseId\"='" + courseId + "' AND grade!=null";
+				+ "' AND \"courseId\"='" + courseId + "' AND grade is not NULL";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 
 	}
@@ -257,8 +258,22 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public List<Course> fetchAvailableCourses(Course course) {
+	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql="select * from \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"deptId\"=? and \"Registration DB\".\"Courses\".\"degree\"=? and \"Registration DB\".\"Courses\".\"isActive\"=true\r\n" + 
+				"and \"Registration DB\".\"Courses\".\"courseId\" NOT IN(select \"Registration DB\".\"Enrollments\".\"courseId\" from \"Registration DB\".\"Enrollments\"\r\n" + 
+				"where \"Registration DB\".\"Enrollments\".\"id\"=?)";
+		Object[] args = { selectCriteria.getDeptId(),selectCriteria.getDegree(),selectCriteria.getUserId()};
+		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
+	@Override
+	public List<Course> fetchNotEnrolledCourses(User user) {
+		// TODO Auto-generated method stub
+		String sql="select * from \"Registration DB\".\"Courses\" where \"Registration DB\".\"Courses\".\"isActive\"=true\r\n" + 
+				"and \"Registration DB\".\"Courses\".\"courseId\" NOT IN(select \"Registration DB\".\"Enrollments\".\"courseId\" from \"Registration DB\".\"Enrollments\"\r\n" + 
+				"where \"Registration DB\".\"Enrollments\".\"id\"=?)";
+		Object[] args = { user.getId()};
+		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
+	}
+
 }

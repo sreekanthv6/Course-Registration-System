@@ -25,6 +25,7 @@ public interface RegistrationService {
 	public void sendEmailForPayment(Payment payment);
 	public int postPayment(Payment payment);
 	public int swapCourse(SwapCourse swapCourse);
-	public List<Course> fetchAvailableCourses(Course course);
+	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
+	public List<Course> fetchNotEnrolledCourses(User user);
 	
 }

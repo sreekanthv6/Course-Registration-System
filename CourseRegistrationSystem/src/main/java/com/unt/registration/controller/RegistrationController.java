@@ -117,4 +117,15 @@ public class RegistrationController {
 	public List<Course> mandatoryCoursesNotDone(@RequestBody User user) {
 		return registrationDaoImpl.mandatoryCoursesNotDone(user);
 	}
+	@PostMapping(path = "/fetchAvailableCourses", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> fetchAvailableCourses(@RequestBody SelectCriteria selectCriteria) {
+		return registrationServiceImpl.fetchAvailableCourses(selectCriteria);
+	}
+	@PostMapping(path = "/fetchNotEnrolledCourses", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> fetchNotEnrolledCourses(@RequestBody User user) {
+		return registrationServiceImpl.fetchNotEnrolledCourses(user);
+	}
+	
 }
