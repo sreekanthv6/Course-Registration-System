@@ -1,3 +1,125 @@
-<p>
-  add-course works!
-</p>
+<html>
+
+<title>Course Registration System</title>
+    <body><form [formGroup]="signupForm" class=login100-form (ngSubmit)="onSubmit()">
+                        
+        <h4>Add Course</h4>
+    
+    <div class="row">
+        <div class="wrap-input100 columnl form-group">
+            <input type="text" formControlName="id" class=" input100 form-control" placeholder="Course ID"
+                [ngClass]="{ 'is-invalid': (submitted&&f.id.errors) || (f.id.touched && f.id.errors) }" />
+            <span class="focus-input100"></span>
+             <div class="invalid-feedback" *ngIf="f.id.touched && f.id.errors?.required">Course ID is required</div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="courseName" class=" input100 form-control"
+                placeholder="Course Name"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseName.errors) || (f.courseName.touched && f.courseName.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseName.errors) || (f.courseName.touched && f.courseName.errors)" class="invalid-feedback">
+            <div *ngIf="f.courseName.errors?.required">Coursename is required
+            </div>
+            </div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="deptId" class=" input100 form-control"
+                placeholder="Department ID"
+                [ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors)" class="invalid-feedback">
+            <div  *ngIf="f.deptId.errors?.required">Department ID is required</div>
+            </div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="professorName" class=" input100 form-control"
+                placeholder="Professor Name"
+                [ngClass]="{ 'is-invalid': (submitted&&f.professorName.errors) || (f.professorName.touched && f.professorName.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.professorName.errors) || (f.professorName.touched && f.professorName.errors)" class="invalid-feedback">
+            <div  *ngIf="f.professorName.errors?.required">professor Name is required</div>
+            </div>
+        </div>
+        <div class="wrap-input100 form-group columnl">
+            <input type="text" formControlName="degree" class=" input100 form-control"
+                placeholder="Degree "
+                [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors)" class="invalid-feedback">
+            <div  *ngIf="f.degree.errors?.required">Degree is required</div>
+            </div>
+        </div>
+         <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="number" formControlName="amount" class=" input100 form-control"
+                placeholder="Amount"
+                [ngClass]="{ 'is-invalid': (submitted&&f.amount.errors) || (f.amount.touched && f.amount.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.amount.errors) || (f.amount.touched && f.amount.errors)" class="invalid-feedback">
+                <div *ngIf="f.mobile.errors?.required">Amount is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="number" formControlName="courseMaxStrength" class=" input100 form-control"
+                placeholder="Maximum Course Strength"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseMaxStrength.errors) || (f.courseMaxStrength.touched && f.courseMaxStrength.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseMaxStrength.errors) || (f.courseMaxStrength.touched && f.courseMaxStrength.errors)" class="invalid-feedback">
+                <div *ngIf="f.courseMaxStrength.errors?.required">Course Maximum Strength is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="text" formControlName="courseTimings" class=" input100 form-control"
+                placeholder="Course Timings"
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseTimings.errors) || (f.courseTimings.touched && f.courseTimings.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.courseTimings.errors) || (f.courseTimings.touched && f.courseTimings.errors)" class="invalid-feedback">
+                <div *ngIf="f.courseTimings.errors?.required">Course Timings is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="text" formControlName="days" class=" input100 form-control"
+                placeholder="Days"
+                [ngClass]="{ 'is-invalid': (submitted&&f.days.errors) || (f.days.touched && f.days.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.days.errors) || (f.days.touched && f.days.errors)" class="invalid-feedback">
+                <div *ngIf="f.days.errors?.required">Days is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="text" formControlName="startDate" class=" input100 form-control"
+                placeholder="Start Date"
+                [ngClass]="{ 'is-invalid': (submitted&&f.startDate.errors) || (f.startDate.touched && f.startDate.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.startDate.errors) || (f.startDate.touched && f.startDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.startDate.errors?.required">Start Date is required</div>
+                
+            </div>
+        </div> 
+        <div class="wrap-input100 wrap-right columnr form-group">
+            <input type="text" formControlName="endDate" class=" input100 form-control"
+                placeholder="End Date"
+                [ngClass]="{ 'is-invalid': (submitted&&f.endDate.errors) || (f.endDate.touched && f.endDate.errors) }" />
+            <span class="focus-input100"></span>
+            <div *ngIf="(submitted&&f.endDate.errors) || (f.endDate.touched && f.endDate.errors)" class="invalid-feedback">
+                <div *ngIf="f.endDate.errors?.required">End Date is required</div>
+                
+            </div>
+        </div>
+     
+      
+    <div class="container-login100-form-btn form-group">
+        <button type="submit" [disabled]="loading"
+            class="login100-form-btn btn btn-primary">SUBMIT</button> 
+    <div>
+        <a class="txt2" [routerLink]="['/login']">
+            Go back to Login
+            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+        </a>
+    </div>
+    </div>
+    </form></body>
+    </html>
