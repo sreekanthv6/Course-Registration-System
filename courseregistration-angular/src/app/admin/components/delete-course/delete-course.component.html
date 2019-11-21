@@ -1,3 +1,56 @@
-<p>
-  delete-course works!
-</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Course Registration System</title>
+</head>
+<style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid black;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        
+        /* div {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+          width:25%;
+          top: 20%;
+          left:20%;
+          display: inline-block;
+        } */
+        </style>
+<body class="box">
+          <div>
+            <h3>Delete Course</h3>
+  <select #delete class="dropdown" required name="deleteId">
+<option value='' selected>Select Course</option>
+<option  *ngFor="let course of existingcourses" value={{course.courseId}}>
+    {{course.courseName}}
+</option>
+</select>
+     
+      <button type="submit" (click)="onsubmit(delete.value)">DELETE</button>
+      </div>
+    </body>
+</html>

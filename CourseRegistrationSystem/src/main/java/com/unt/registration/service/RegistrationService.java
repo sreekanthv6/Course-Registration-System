@@ -27,5 +27,6 @@ public interface RegistrationService {
 	public int swapCourse(SwapCourse swapCourse);
 	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
 	public List<Course> fetchNotEnrolledCourses(User user);
+	public List<Course> fetchExistingCourses();
 	
 }

@@ -6,7 +6,7 @@ export class Course {
     year: Number; 
     isActive: Boolean;
     amount: Number;
-    isManadatory: Boolean;
+    isMandatory: Boolean;
     strength: Number;
     degree: String;
     professor: String;
@@ -24,7 +24,7 @@ export class Course {
         this.amount = 0;
         this.strength=0;
         this.isActive = false;
-        this.isManadatory = false;
+        this.isMandatory = false;
         this.degree = '';
         this.professor='';
         this.courseMaNumberxStrength=0;

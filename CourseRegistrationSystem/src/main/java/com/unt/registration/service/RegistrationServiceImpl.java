@@ -244,14 +244,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 		EnrollObject enrollObject=new EnrollObject();
 		enrollObject.setUserId(swapCourse.getUserId());
 		enrollObject.setCourseId(swapCourse.getNewCourseId());
-		System.out.println("new course "+enrollObject.getCourseId());
 		int j=this.enroll(enrollObject);
-		System.out.println("ernoll success "+j);
 		if(j==1) {
 		enrollObject.setCourseId(swapCourse.getOldCourseId());
-		System.out.println("old course "+enrollObject.getCourseId());
 		Boolean i=this.dropCourse(enrollObject);
-		System.out.println("drp success "+i);
 		if(i) 
 		return 1;
 		
@@ -263,7 +259,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 		}
 		}
 		else
-			System.out.println(j);
 			return j;
 	}
 
@@ -278,6 +273,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 		// TODO Auto-generated method stub
 		
 		return registrationDaoImpl.fetchNotEnrolledCourses(user);
+	}
+	@Override
+	public List<Course> fetchExistingCourses() {
+		// TODO Auto-generated method stub
+		return registrationDaoImpl.fetchExistingCourses();
 	}
 	
 }

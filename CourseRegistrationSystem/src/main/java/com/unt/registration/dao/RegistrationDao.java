@@ -41,4 +41,6 @@ public interface RegistrationDao {
 	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
 	public List<Course> fetchNotEnrolledCourses(User user);
 	public int addCourse(Course course);
+	public List<Course> fetchExistingCourses();
+	public int deleteCourse(String courseId);
 }

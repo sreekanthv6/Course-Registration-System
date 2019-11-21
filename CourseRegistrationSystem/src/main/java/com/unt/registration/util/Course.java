@@ -10,7 +10,7 @@ public class Course {
 	private int year ; 
 	private Boolean isActive;
 	private float amount;
-	private Boolean isManadatory;
+	private Boolean isMandatory;
 	private int strength;
 	private String degree;
 	private String professor;
@@ -87,11 +87,11 @@ public class Course {
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	public Boolean getIsManadatory() {
-		return isManadatory;
+	public Boolean getIsMandatory() {
+		return isMandatory;
 	}
-	public void setIsManadatory(Boolean isManadatory) {
-		this.isManadatory = isManadatory;
+	public void setIsMandatory(Boolean isMandatory) {
+		this.isMandatory = isMandatory;
 	}
 	public int getStrength() {
 		return strength;
