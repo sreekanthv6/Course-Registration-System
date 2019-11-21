@@ -16,16 +16,33 @@
    
    text-align:center;
    }
-   table tr:nth-child(even) {
+   /* table tr:nth-child(even) {
      background-color: #eee;
    }
    table tr:nth-child(odd) {
      background-color: #fff;
-   }
+   } */
+   button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 100px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
    </style>
 <body class="box">
         <form [formGroup]="paymentForm" (ngSubmit)="onsubmit()">
           <h4>Payment</h4>
+          <br>
           <div >
            <table >
              <tr>
