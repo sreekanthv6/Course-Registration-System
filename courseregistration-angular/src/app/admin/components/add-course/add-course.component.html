@@ -2,7 +2,81 @@
 <head>
 <title>Course Registration System</title>
 </head>
-    <body><form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
+<style>
+        input[type=text],
+        select
+         {
+            width: 75%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid green;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=number],
+        select
+         {
+            width: 75%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid green;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        input[type=password] {
+            width: 75%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid green;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: 1px solid green;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        h4{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    
+        
+    
+        button {
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+            padding: 4px;
+            width: 345px;
+            border-radius: 8px;
+            height: 35px;
+            border: 1px solid green;
+        }
+    
+        button:hover {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+        }
+    
+        
+    </style>
+
+    <body class="box"><form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
                         
         <h4>Add Course</h4>
         
@@ -49,7 +123,9 @@
             <select class="dropdown" required formControlName="degree" name="degree"
                 [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }">
                 <span class="focus-input100"></span>
-                <option value='G' selected>Graduate</option>
+                
+                <option value='' selected>Degree</option>
+                <option value='G' >Graduate</option>
                 <option value='UG'>Under Graduate</option>
             </select>
             <div *ngIf="(submitted&&f.degree.errors)||(f.degree.touched&&f.degree.errors)" class="invalid-feedback">
@@ -60,7 +136,9 @@
             <select class="dropdown" required formControlName="isMandatory" name="isMandatory"
                 [ngClass]="{ 'is-invalid': (submitted&&f.isMandatory.errors) || (f.isMandatory.touched && f.isMandatory.errors) }">
                 <span class="focus-input100"></span>
-                <option value=true selected>Yes</option>
+                
+                <option value='' selected>Is Mandatory?</option>
+                <option value=true >Yes</option>
                 <option value=false>No</option>
             </select>
             <div *ngIf="(submitted&&f.isMandatory.errors)||(f.isMandatory.touched&&f.isMandatory.errors)" class="invalid-feedback">
