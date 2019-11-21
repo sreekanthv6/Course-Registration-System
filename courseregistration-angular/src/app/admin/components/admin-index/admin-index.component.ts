@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/user/model/user';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-admin-index',
@@ -7,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminIndexComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    
+    this.user = this.userService.getSession('user');
   }
 
 }

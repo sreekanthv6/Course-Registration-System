@@ -10,18 +10,12 @@ import { RegistrationModule } from './registration/registration.module';
 import { SearchModule } from './search/search.module';
 import { MyclassesModule } from './myclasses/myclasses.module';
 import { FinanceModule } from './finance/finance.module';
-import { ContactUsComponent } from './finance/components/contact-us/contact-us.component';
-import { AdminIndexComponent } from './admin/components/admin-index/admin-index.component';
-import { AddCourseComponent } from './admin/components/add-course/add-course.component';
-import { DeleteCourseComponent } from './admin/components/delete-course/delete-course.component';
+import { AdminModule } from './admin/admin.module';
 //import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AdminIndexComponent,
-    AddCourseComponent,
-    DeleteCourseComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +26,8 @@ import { DeleteCourseComponent } from './admin/components/delete-course/delete-c
     BrowserAnimationsModule,
     SearchModule,
     MyclassesModule,
-    FinanceModule
+    FinanceModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

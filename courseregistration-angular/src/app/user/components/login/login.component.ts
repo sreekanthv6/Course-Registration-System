@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
         else {
           this.userService.sendSubmitMessage("Success::"+this.user.id + "logged in Successfully");
           this.userService.setSession('user',this.user);
+          if(this.user.role==1)
+          this.router.navigate(['admin-index']);
+          else
           this.router.navigate(['student-index']);
         }
       }

@@ -1,13 +1,14 @@
 <html>
-
+<head>
 <title>Course Registration System</title>
-    <body><form [formGroup]="signupForm" class=login100-form (ngSubmit)="onSubmit()">
+</head>
+    <body><form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
                         
         <h4>Add Course</h4>
-    
+        
     <div class="row">
         <div class="wrap-input100 columnl form-group">
-            <input type="text" formControlName="id" class=" input100 form-control" placeholder="Course ID"
+            <input type="text" formControlName="courseId" class=" input100 form-control" placeholder="Course ID"
                 [ngClass]="{ 'is-invalid': (submitted&&f.id.errors) || (f.id.touched && f.id.errors) }" />
             <span class="focus-input100"></span>
              <div class="invalid-feedback" *ngIf="f.id.touched && f.id.errors?.required">Course ID is required</div>
@@ -114,12 +115,9 @@
     <div class="container-login100-form-btn form-group">
         <button type="submit" [disabled]="loading"
             class="login100-form-btn btn btn-primary">SUBMIT</button> 
-    <div>
-        <a class="txt2" [routerLink]="['/login']">
-            Go back to Login
-            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-        </a>
+    
     </div>
     </div>
-    </form></body>
+    </form>
+</body>
     </html>

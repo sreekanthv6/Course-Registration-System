@@ -32,7 +32,7 @@
            <table >
              <tr>
                <td>Total Due:</td>
-               <td>{{due}}$</td>
+               <td>${{due}}</td>
              </tr>
              <tr>
                 <td>Enter Amount</td >
@@ -42,7 +42,7 @@
 
               </tr>
               <div *ngIf="submitted && f.paymentAmount.errors" class="invalid-feedback">
-              <tr *ngIf="f.paymentAmount.errors.required">Student ID is required
+              <tr *ngIf="paymentAmount.errors.required">Please enter the amount you wish to pay
               </tr>
             </div>
            </table>

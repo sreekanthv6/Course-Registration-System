@@ -139,7 +139,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 		if (registrationDaoImpl.dropCourse(enrollObject) > 0
 				&& registrationDaoImpl.decreaseStrength(enrollObject.getCourseId()) > 0) {
-			sendEmail(enrollObject, 1);
+			sendEmail(enrollObject, 0);
 			return true;
 		}
 		return false;
@@ -149,7 +149,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Override
 	public boolean sendEmail(EnrollObject enrollObject, int value) {
 		String emailId;
-		Course course;
+		Course course,swap;
 
 		try {
 
@@ -158,14 +158,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 			MimeMessageHelper helper = new MimeMessageHelper(msg, true);
 			emailId = registrationDaoImpl.getEmail(enrollObject.getUserId());
 			course = registrationDaoImpl.findCourse(enrollObject.getCourseId());
+			swap=registrationDaoImpl.findCourse(enrollObject.getCourseId());
+			
 
 			helper.setTo(emailId);
 			if (value == 0) {
 				helper.setSubject("Notification for dropping");
 				helper.setText("<h3>Dropped Course  " + course.getCourseName() + "Successfully!</h3>", true);
-			} else {
+			} else if(value==1){
 				helper.setSubject("Notification for Enrolling");
 				helper.setText("<h3>Enrolled Course  " + course.getCourseName() + "Successfully!</h3>", true);
+			}
+			else {
+				helper.setSubject("Notification for Swapping");
+				helper.setText("<h3>Swapped Course  " + swap.getCourseName() + "Successfully!</h3>", true);
 			}
 
 			javaMailSender.send(msg);
@@ -251,6 +257,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		else {
 			enrollObject.setCourseId(swapCourse.getNewCourseId());
 			this.dropCourse(enrollObject);
+			sendEmail(enrollObject, 3);
 			return 0;
 		}
 		}
