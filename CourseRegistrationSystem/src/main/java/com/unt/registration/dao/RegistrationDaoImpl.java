@@ -278,18 +278,32 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Override
 	public int addCourse(Course course) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO Courses values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		System.out.println(course.getAmount());
+		String sql = "INSERT INTO \"Registration DB\".\"Courses\" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] args = { course.getCourseId(), course.getCourseName(), course.getDeptId(), this.getCurrentSemester(),
-				Calendar.getInstance().get(Calendar.YEAR), course.getIsActive(), course.getAmount(), course.getIsManadatory(),course.getStrength(),course.getDegree(),course.getProfessor(),
-				course.getCourseMaxStrength(),course.getCourseTimings(),course.getDays(),course.getStartDate(),course.getEndDate()};
-		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC, 
-				Types.NUMERIC, Types.BOOLEAN,Types.NUMERIC, Types.BOOLEAN,Types.NUMERIC,Types.VARCHAR,Types.VARCHAR,
-				 Types.NUMERIC, Types.VARCHAR, Types.VARCHAR,Types.VARCHAR, Types.VARCHAR};
-		if (jdbcTemplate.update(sql, args, argTypes) == 1)
-			return 0;
-		else
-			return 1;
+				Calendar.getInstance().get(Calendar.YEAR), true, course.getIsMandatory(),course.getStrength(),course.getDegree(),course.getProfessor(),
+				course.getCourseMaxStrength(),course.getCourseTimings(),course.getDays(),course.getStartDate(),course.getEndDate(), course.getAmount()};
+		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, 
+				Types.NUMERIC, Types.BOOLEAN, Types.BOOLEAN,Types.NUMERIC,Types.VARCHAR,Types.VARCHAR,
+				 Types.NUMERIC, Types.VARCHAR, Types.VARCHAR,Types.VARCHAR, Types.VARCHAR, Types.NUMERIC};
+		return jdbcTemplate.update(sql, args, argTypes);
 		
 	}
-
+	@Override
+	public List<Course> fetchExistingCourses() {
+		// TODO Auto-generated method stub
+		String sql = "SELECT * FROM \"Registration DB\".\"Courses\"";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Course>(Course.class));
+		
+	}
+	
+			@Override
+			public int deleteCourse(String courseId) {
+				// TODO Auto-generated method stub
+				String sql = "delete from \"Registration DB\".\"Courses\" where \"courseId\"=?";
+				Object[] args = {courseId};
+				int[] argTypes = { Types.VARCHAR};
+				return jdbcTemplate.update(sql, args, argTypes);
+				
+			}
 }

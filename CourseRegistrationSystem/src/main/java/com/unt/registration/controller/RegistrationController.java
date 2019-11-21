@@ -132,5 +132,15 @@ public class RegistrationController {
 	public int addCourse(@RequestBody Course course) {
 		return registrationDaoImpl.addCourse(course);
 	}
+	@GetMapping(path = "/fetchExistingCourses", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public List<Course> fetchExistingCourses() {
+		return registrationServiceImpl.fetchExistingCourses();
+	}
+	@PostMapping(path = "/deleteCourse", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public int deleteCourse(@RequestBody String courseId) {
+		return registrationDaoImpl.deleteCourse(courseId);
+	}
 
 }

@@ -9,9 +9,9 @@
     <div class="row">
         <div class="wrap-input100 columnl form-group">
             <input type="text" formControlName="courseId" class=" input100 form-control" placeholder="Course ID"
-                [ngClass]="{ 'is-invalid': (submitted&&f.id.errors) || (f.id.touched && f.id.errors) }" />
+                [ngClass]="{ 'is-invalid': (submitted&&f.courseId.errors) || (f.courseId.touched && f.courseId.errors) }" />
             <span class="focus-input100"></span>
-             <div class="invalid-feedback" *ngIf="f.id.touched && f.id.errors?.required">Course ID is required</div>
+             <div class="invalid-feedback" *ngIf="f.courseId.touched && f.courseId.errors?.required">Course ID is required</div>
         </div>
         <div class="wrap-input100 form-group columnl">
             <input type="text" formControlName="courseName" class=" input100 form-control"
@@ -23,32 +23,49 @@
             </div>
             </div>
         </div>
-        <div class="wrap-input100 form-group columnl">
-            <input type="text" formControlName="deptId" class=" input100 form-control"
-                placeholder="Department ID"
-                [ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }" />
-            <span class="focus-input100"></span>
-            <div *ngIf="(submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors)" class="invalid-feedback">
-            <div  *ngIf="f.deptId.errors?.required">Department ID is required</div>
-            </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="deptId" name="deptId"
+                [ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }">
+                <span class="focus-input100"></span>
+                <option value='' selected>Department</option>
+                <option *ngFor="let dept of departments" value={{dept.deptId}}>
+                    {{dept.deptName}}
+                </option>
+            </select>
+            <div *ngIf="(submitted&&f.deptId.errors)||(f.deptId.touched&&f.deptId.errors)" class="invalid-feedback">
+                    <div *ngIf="f.deptId.errors?.required">Please select your department</div>
+</div>
         </div>
         <div class="wrap-input100 form-group columnl">
-            <input type="text" formControlName="professorName" class=" input100 form-control"
+            <input type="text" formControlName="professor" class=" input100 form-control"
                 placeholder="Professor Name"
-                [ngClass]="{ 'is-invalid': (submitted&&f.professorName.errors) || (f.professorName.touched && f.professorName.errors) }" />
+                [ngClass]="{ 'is-invalid': (submitted&&f.professor.errors) || (f.professor.touched && f.professor.errors) }" />
             <span class="focus-input100"></span>
-            <div *ngIf="(submitted&&f.professorName.errors) || (f.professorName.touched && f.professorName.errors)" class="invalid-feedback">
-            <div  *ngIf="f.professorName.errors?.required">professor Name is required</div>
+            <div *ngIf="(submitted&&f.professor.errors) || (f.professor.touched && f.professor.errors)" class="invalid-feedback">
+            <div  *ngIf="f.professor.errors?.required">professor Name is required</div>
             </div>
         </div>
-        <div class="wrap-input100 form-group columnl">
-            <input type="text" formControlName="degree" class=" input100 form-control"
-                placeholder="Degree "
-                [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }" />
-            <span class="focus-input100"></span>
-            <div *ngIf="(submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors)" class="invalid-feedback">
-            <div  *ngIf="f.degree.errors?.required">Degree is required</div>
-            </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="degree" name="degree"
+                [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }">
+                <span class="focus-input100"></span>
+                <option value='G' selected>Graduate</option>
+                <option value='UG'>Under Graduate</option>
+            </select>
+            <div *ngIf="(submitted&&f.degree.errors)||(f.degree.touched&&f.degree.errors)" class="invalid-feedback">
+                    <div *ngIf="f.degree.errors?.required">Please select your degree</div>
+</div>
+        </div>
+        <div class="form-group wrap-input100 columnl">
+            <select class="dropdown" required formControlName="isMandatory" name="isMandatory"
+                [ngClass]="{ 'is-invalid': (submitted&&f.isMandatory.errors) || (f.isMandatory.touched && f.isMandatory.errors) }">
+                <span class="focus-input100"></span>
+                <option value=true selected>Yes</option>
+                <option value=false>No</option>
+            </select>
+            <div *ngIf="(submitted&&f.isMandatory.errors)||(f.isMandatory.touched&&f.isMandatory.errors)" class="invalid-feedback">
+                    <div *ngIf="f.isMandatory.errors?.required">Please tell if the course is mandatory</div>
+</div>
         </div>
          <div class="wrap-input100 wrap-right columnr form-group">
             <input type="number" formControlName="amount" class=" input100 form-control"
@@ -68,8 +85,8 @@
             <div *ngIf="(submitted&&f.courseMaxStrength.errors) || (f.courseMaxStrength.touched && f.courseMaxStrength.errors)" class="invalid-feedback">
                 <div *ngIf="f.courseMaxStrength.errors?.required">Course Maximum Strength is required</div>
                 
+            </div> 
             </div>
-        </div> 
         <div class="wrap-input100 wrap-right columnr form-group">
             <input type="text" formControlName="courseTimings" class=" input100 form-control"
                 placeholder="Course Timings"
