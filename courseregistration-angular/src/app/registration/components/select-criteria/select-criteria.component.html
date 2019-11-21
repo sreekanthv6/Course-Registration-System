@@ -5,12 +5,16 @@
     <title>Course Registration System</title>
 </head>
 <style>
+  * html{
+    font-family:Arial;
+  }
   option{
     border: 2px;
   }
     th {
      
      background: green;
+     color: white;
    }
    td{
    
@@ -37,7 +41,7 @@
         /* Safari */
         transition-duration: 0.4s;
         padding: 4px;
-        width: 345px;
+        width: 100px;
         border-radius: 8px;
         height: 35px;
         border: 1px solid green;
@@ -51,9 +55,10 @@
    </style>
 <body >
   <div class="box">
-    <h3>Please Choose</h3>
+    <!-- <h3>Please Choose</h3> -->
     <form *ngIf="form" [formGroup]="selectCriteriaForm"  (ngSubmit)="onSubmit()">
-      <div>
+      <h3>PLease choose</h3>
+      <div class="select">
         <select class="dropdown" required formControlName="degree" name="degree"
         [ngClass]="{ 'is-invalid': (submitted&&f.degree.errors) || (f.degree.touched && f.degree.errors) }">
         <span class="focus-input100"></span>
@@ -62,7 +67,7 @@
         <option value='G' >Graduate</option>
       </select>
       </div>
-      <div>
+      <div class="select">
   <select class="dropdown" required formControlName="deptId" name="deptId"
 [ngClass]="{ 'is-invalid': (submitted&&f.deptId.errors) || (f.deptId.touched && f.deptId.errors) }">
 <option value='' selected>Department</option>
@@ -86,13 +91,14 @@
                   <td>{{course.courseName}}</td>
                   <td>{{course.professor}}</td>
                   <td>{{course.courseTimings}}</td>
+                  <td> &nbsp; &nbsp;</td>
                 <!--  <td><a [routerLink]="['/cart', { courseId:course.courseId }]">ENROLL</a></td>-->
                   <td id="button"><button #btn [disabled]="course.isAddedtoCart" value={{course.courseId}}  (click)="addtocart(btn.value)">ADD TO CART</button></td>
                   
                <!--[disabled]="course.isAddedtoCart"   <td *ngIf="enrolled"><button disabled>Added to cart</button></td>-->
 
                 </tr>
-                <tr><td><a [routerLink]="['/cart']">Go to cart</a></td></tr>
+                <tr><td><button type="submit" [routerLink]="['/cart']">Go to cart</button></td></tr>
                 </table>
 </div>
 </div>

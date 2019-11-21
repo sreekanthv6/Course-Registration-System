@@ -4,13 +4,65 @@
 <head>
   <title>Course Registration System</title>
 </head>
-
-<body>
+<style>
+    * html{
+      font-family:Arial;
+    }
+    option{
+      border: 2px;
+    }
+      th {
+       
+       background: green;
+       color: white;
+     }
+     td{
+     
+     text-align:center;
+     }
+     table tr:nth-child(even) {
+       background-color: #eee;
+     }
+     table tr:nth-child(odd) {
+       background-color: #fff;
+     }
+     input[type=text], select {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            top:50%;
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+          }
+          button {
+          -webkit-transition-duration: 0.4s;
+          /* Safari */
+          transition-duration: 0.4s;
+          padding: 4px;
+          width: 300px;
+          border-radius: 8px;
+          height: 35px;
+          border: 1px solid green;
+      }
+  
+      button:hover {
+          background-color: #4CAF50;
+          /* Green */
+          color: white;
+      }
+      h3{
+        color: white;
+      }
+     </style>
+<body class="box">
         <form *ngIf="form" [formGroup]="searchForm" (ngSubmit)="onsubmit()">
           <span>
-            Search Courses
+            <h3>Search Courses</h3>
           </span>
-          <div>
+          <div class="select">
             <select class="dropdown" required formControlName="deptId" name="deptId">
               <option value='' selected>Department</option>
               <option *ngFor="let dept of departments" value={{dept.deptId}}>
@@ -18,7 +70,7 @@
               </option>
               </select>
           </div>
-          <div>
+          <div class="select">
             <select class="dropdown" required formControlName="degree" name="degree">
         
               <option value='' selected>Degree</option>

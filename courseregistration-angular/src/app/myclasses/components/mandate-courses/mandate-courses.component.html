@@ -23,10 +23,10 @@
      background-color: #fff;
    }
    </style>
-<body>
+<body class="box">
     <div>
-      <h6>Mandatory courses which you have completed/enrolled:</h6>
-        <table border=2>
+      <h6 >Mandatory courses which you have completed/enrolled:</h6>
+        <table border=2 >
             <th>Course ID</th>
             <th>Course Name</th>          
             <tr *ngFor="let course of donecourses" >
@@ -36,9 +36,11 @@
               </tr>
               </table>
 </div>
-<div>
-    <h6>Mandatory courses which are yet to be done:</h6>
-      <table border=2>
+<br>
+<br>
+<div >
+    <h6 > Mandatory courses which are yet to be done:</h6>
+      <table border=2 >
           <th>Course ID</th>
           <th>Course Name</th>          
           <tr *ngFor="let course of notenrolledcourses" >
