@@ -104,7 +104,7 @@ public class RegistrationController {
 	}
 	@PostMapping(path = "/viewDues", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public float viewDues(@RequestBody Payment payment) {
+	public int viewDues(@RequestBody Payment payment) {
 		return registrationServiceImpl.viewDues(payment);
 	}
 	@PostMapping(path = "/mandatoryCoursesDone", produces = { MediaType.APPLICATION_JSON_VALUE,

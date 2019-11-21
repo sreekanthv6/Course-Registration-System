@@ -9,7 +9,7 @@ public class Course {
 	private String semester;
 	private int year ; 
 	private Boolean isActive;
-	private float amount;
+	private int amount;
 	private Boolean isMandatory;
 	private int strength;
 	private String degree;
@@ -81,10 +81,10 @@ public class Course {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	public float getAmount() {
+	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public Boolean getIsMandatory() {

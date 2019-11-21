@@ -220,17 +220,17 @@ public class RegistrationDaoImpl implements RegistrationDao {
 				new BeanPropertyRowMapper<Grade>(Grade.class));
 	}
 	@Override
-	public float pastPaymentsAmount(Payment payment) {
+	public int pastPaymentsAmount(Payment payment) {
 		// TODO Auto-generated method stub
 		String sql="select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id='"+payment.getId()+"'";
-		return jdbcTemplate.queryForObject(sql,  Float.class);
+		return jdbcTemplate.queryForObject(sql,  Integer.class);
 	}
 
 	@Override
-	public float totalAmount(Payment payment) {
+	public int totalAmount(Payment payment) {
 		// TODO Auto-generated method stub
 		String sql="select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id='"+payment.getId()+"'";
-		return jdbcTemplate.queryForObject(sql,  Float.class);
+		return jdbcTemplate.queryForObject(sql,  Integer.class);
 	}
 
 	@Override

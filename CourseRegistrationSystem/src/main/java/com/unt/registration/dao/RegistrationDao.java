@@ -33,8 +33,8 @@ public interface RegistrationDao {
 	public int postPayment(Payment payment, String paymentId, String strDate);
 	public List<Payment> pastPayments(User user);
 	public List<Grade> viewGrades(User user);
-	public float pastPaymentsAmount(Payment payment);
-	public float totalAmount(Payment payment);
+	public int pastPaymentsAmount(Payment payment);
+	public int totalAmount(Payment payment);
 	public List<Course> mandatoryCoursesNotDone(User user);
 	public List<Course> mandatoryCoursesDone(User user);
 	public int ifPrerequisitesExist(String courseId);

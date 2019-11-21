@@ -19,7 +19,6 @@
 
     button:hover {
         background-color: #4CAF50;
-        /* Green */
         color: white;
     }
 
@@ -27,10 +26,10 @@
 <body >
         <img src="assets/images/enquiry.jpg" alt="img">
 <div class="box"><h3>Please mail us for Enquiries</h3>
-    <textarea placeholder="send us message" rows="7" cols="50" >
+    <textarea #text placeholder="send us message" rows="7" cols="50" >
     
     </textarea><br>
-    <button type="submit" >Message</button>
+    <button type="submit" (click)="onsubmit(text.value)">Message</button>
 </div>
 
 </body>

@@ -21,7 +21,7 @@ public interface RegistrationService {
 	public List<Course> fetchEnrolledCourses(User user);
 	public boolean dropCourse(EnrollObject enrollObject);
 	public boolean sendEmail(EnrollObject enrollObject, int value);
-	public float viewDues(Payment payment);
+	public int viewDues(Payment payment);
 	public void sendEmailForPayment(Payment payment);
 	public int postPayment(Payment payment);
 	public int swapCourse(SwapCourse swapCourse);

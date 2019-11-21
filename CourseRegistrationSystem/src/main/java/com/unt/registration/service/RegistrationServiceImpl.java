@@ -185,10 +185,10 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public float viewDues(Payment payment) {
+	public int viewDues(Payment payment) {
 		// TODO Auto-generated method stub
-		float pastPaymentsAmount = registrationDaoImpl.pastPaymentsAmount(payment);
-		float totalAmount = registrationDaoImpl.totalAmount(payment);
+		int pastPaymentsAmount = registrationDaoImpl.pastPaymentsAmount(payment);
+		int totalAmount = registrationDaoImpl.totalAmount(payment);
 		return totalAmount - pastPaymentsAmount;
 
 	}
