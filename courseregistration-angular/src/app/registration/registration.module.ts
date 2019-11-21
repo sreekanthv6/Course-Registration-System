@@ -10,7 +10,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { StudentIndexComponent } from './components/student-index/student-index.component';
 import { SelectCriteriaComponent } from './components/select-criteria/select-criteria.component';
 import { CartComponent } from './components/cart/cart.component';
-import { RegistrationService } from './services/registration.service';
+import { RegistrationService } from 'src/app/registration/services/registration.service';
 
 
 @NgModule({

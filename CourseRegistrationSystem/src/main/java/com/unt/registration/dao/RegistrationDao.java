@@ -40,4 +40,5 @@ public interface RegistrationDao {
 	public int ifPrerequisitesExist(String courseId);
 	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
 	public List<Course> fetchNotEnrolledCourses(User user);
+	public int addCourse(Course course);
 }

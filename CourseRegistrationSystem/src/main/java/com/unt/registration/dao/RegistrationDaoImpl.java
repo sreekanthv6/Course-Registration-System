@@ -275,5 +275,21 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		Object[] args = { user.getId()};
 		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
+	@Override
+	public int addCourse(Course course) {
+		// TODO Auto-generated method stub
+		String sql = "INSERT INTO Courses values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] args = { course.getCourseId(), course.getCourseName(), course.getDeptId(), this.getCurrentSemester(),
+				Calendar.getInstance().get(Calendar.YEAR), course.getIsActive(), course.getAmount(), course.getIsManadatory(),course.getStrength(),course.getDegree(),course.getProfessor(),
+				course.getCourseMaxStrength(),course.getCourseTimings(),course.getDays(),course.getStartDate(),course.getEndDate()};
+		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC, 
+				Types.NUMERIC, Types.BOOLEAN,Types.NUMERIC, Types.BOOLEAN,Types.NUMERIC,Types.VARCHAR,Types.VARCHAR,
+				 Types.NUMERIC, Types.VARCHAR, Types.VARCHAR,Types.VARCHAR, Types.VARCHAR};
+		if (jdbcTemplate.update(sql, args, argTypes) == 1)
+			return 0;
+		else
+			return 1;
+		
+	}
 
 }

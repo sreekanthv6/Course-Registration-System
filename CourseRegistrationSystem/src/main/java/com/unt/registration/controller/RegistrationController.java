@@ -127,5 +127,10 @@ public class RegistrationController {
 	public List<Course> fetchNotEnrolledCourses(@RequestBody User user) {
 		return registrationServiceImpl.fetchNotEnrolledCourses(user);
 	}
-	
+	@PostMapping(path = "/addCourse", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	public int addCourse(@RequestBody Course course) {
+		return registrationDaoImpl.addCourse(course);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.unt.registration.service;
 
+import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -278,6 +279,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 		
 		return registrationDaoImpl.fetchNotEnrolledCourses(user);
 	}
-
+	
 }
 

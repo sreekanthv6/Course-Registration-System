@@ -22,8 +22,36 @@
    table tr:nth-child(odd) {
      background-color: #fff;
    }
+   input[type=text], select {
+          width: 50%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          top:50%;
+          display: inline-block;
+          border: 1px solid black;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        button {
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        padding: 4px;
+        width: 345px;
+        border-radius: 8px;
+        height: 35px;
+        border: 1px solid green;
+    }
+
+    button:hover {
+        background-color: #4CAF50;
+        /* Green */
+        color: white;
+    }
    </style>
-<body>
+<body >
+  <div class="box">
+    <h3>Please Choose</h3>
     <form *ngIf="form" [formGroup]="selectCriteriaForm"  (ngSubmit)="onSubmit()">
       <div>
         <select class="dropdown" required formControlName="degree" name="degree"
@@ -66,6 +94,7 @@
                 </tr>
                 <tr><td><a [routerLink]="['/cart']">Go to cart</a></td></tr>
                 </table>
+</div>
 </div>
 
 </body>
