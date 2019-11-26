@@ -260,34 +260,29 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	@Override
 	public int pastPaymentsAmount(Payment payment) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
+
 
 		try {
 			String sql = "select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id='"
 					+ payment.getId() + "'";
-			return jdbcTemplate.queryForObject(sql, Float.class);
+			return jdbcTemplate.queryForObject(sql, Integer.class);
 		} catch (Exception e) {
 			return 0;
 		}
 
-=======
-		String sql="select sum(\"paymentAmount\") from \"Registration DB\".\"Payments\" where id='"+payment.getId()+"'";
-		return jdbcTemplate.queryForObject(sql,  Integer.class);
->>>>>>> ee81f8d751d3f6bd3e898b67cea1cc6226e08b41
+
+		
+
 	}
 
 	// Total due amount
 	@Override
 	public int totalAmount(Payment payment) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		String sql = "select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id='"
-				+ payment.getId() + "'";
-		return jdbcTemplate.queryForObject(sql, Float.class);
-=======
+
 		String sql="select sum(amount) from \"Registration DB\".\"Enrollments\" JOIN \"Registration DB\".\"Courses\" ON \"Registration DB\".\"Enrollments\".\"courseId\"=\"Registration DB\".\"Courses\".\"courseId\" where \"Registration DB\".\"Enrollments\".id='"+payment.getId()+"'";
 		return jdbcTemplate.queryForObject(sql,  Integer.class);
->>>>>>> ee81f8d751d3f6bd3e898b67cea1cc6226e08b41
+
 	}
 
 	// Mandatory courses done
