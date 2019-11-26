@@ -280,7 +280,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 				Types.NUMERIC, Types.BOOLEAN, Types.BOOLEAN,Types.NUMERIC,Types.VARCHAR,Types.VARCHAR,
 				 Types.NUMERIC, Types.VARCHAR, Types.VARCHAR,Types.VARCHAR, Types.VARCHAR, Types.NUMERIC};
 		return jdbcTemplate.update(sql, args, argTypes);
-		
+		//comment;
 	}
 	@Override
 	public List<Course> fetchExistingCourses() {
