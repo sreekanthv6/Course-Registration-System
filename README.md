@@ -17,3 +17,7 @@ Contains all test case files.
 
 Project Reports Directory:
 This directory contains all project reports such as UML diagram files, Project documentation..etc
+
+Misc Directory:
+
+Project Installation details and various files related to project.
