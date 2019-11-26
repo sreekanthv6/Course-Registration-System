@@ -15,7 +15,7 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   user: User;
-  userSignedUp: String;
+  userSignedUp: Number;
   department: Department;
   submitted = false;
   loading = false;
@@ -36,20 +36,20 @@ export class SignupComponent implements OnInit {
       let flag = resp.json(); 
       this.userSignedUp = flag;
 
-      if (this.userSignedUp == "signed up") {
+      if (this.userSignedUp == 1) {
         this.userService.sendSubmitMessage("Your account has been created Successfully");
         alert("Your account has been created Successfully. Please login");
         this.router.navigate(['login']);
       }
-      else if(this.userSignedUp == "Unexpected Error"){
+      else if(this.userSignedUp == 0){
         this.userService.sendSubmitMessage("Error occured");
         alert("Unexpected error");
       }
-      else if(this.userSignedUp == "Already signed up"){
+      else if(this.userSignedUp == 2){
         this.userService.sendSubmitMessage("Already signed up");
         alert("You already have an account");
       }
-      else if(this.userSignedUp == "Invalid user") {
+      else if(this.userSignedUp == 3) {
         this.userService.sendSubmitMessage("Invalid user");
         alert("Please enter your user ID provided by the university or contact university help");
       }

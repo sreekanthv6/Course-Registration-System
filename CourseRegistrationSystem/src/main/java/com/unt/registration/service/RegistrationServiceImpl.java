@@ -50,17 +50,17 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public String signup(User user) {
+	public int signup(User user) {
 		if (registrationDaoImpl.userIdProvided(user.getId()) != 0) {
 			if (registrationDaoImpl.userExists(user.getId()) == 0) {
-				if (registrationDaoImpl.signup(user) == true)
-					return "signed up";
+				if (registrationDaoImpl.signup(user) ==1)
+					return 1;
 				else
-					return "Unexpected Error";
+					return 0;
 			} else
-				return "Already signed up";
+				return 2;
 		} else
-			return "Invalid user";
+			return 3;
 	}
 
 	@Override
@@ -70,19 +70,19 @@ public class RegistrationServiceImpl implements RegistrationService {
 	}
 
 	@Override
-	public String resetPassword(User user) {
+	public int resetPassword(User user) {
 		// TODO Auto-generated method stub
 		if (registrationDaoImpl.userExists(user.getId()) != 0) {
 			if (user.getEmail().equals(registrationDaoImpl.getEmail(user.getId()))) {
-				if (registrationDaoImpl.resetPassword(user) == true)
-					return "Password reset";
+				if (registrationDaoImpl.resetPassword(user) > 0)
+					return 1;
 				else
-					return "Unexpected Error";
+					return 0;
 			} else
-				return "invalid email";
+				return 2;
 
 		} else
-			return "Invalid user ID";
+			return 3;
 	}
 
 	@Override

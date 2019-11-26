@@ -40,7 +40,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping(path = "/signup", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public String signup(@RequestBody User user) {
+	public int signup(@RequestBody User user) {
 		return registrationServiceImpl.signup(user);
 	}
 
@@ -52,7 +52,7 @@ public class RegistrationController {
 
 	@PostMapping(path = "/resetPassword", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	public String resetPassword(@RequestBody User user) {
+	public int resetPassword(@RequestBody User user) {
 		return registrationServiceImpl.resetPassword(user);
 	}
 
@@ -130,7 +130,16 @@ public class RegistrationController {
 	@PostMapping(path = "/addCourse", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	public int addCourse(@RequestBody Course course) {
-		return registrationDaoImpl.addCourse(course);
+		String year1=Integer.toString((course.getStartDate().getYear())+1900);
+		String month1=Integer.toString(course.getStartDate().getMonth());
+		String date1=Integer.toString(course.getStartDate().getDate());
+		String startDate=year1+"-"+month1+"-"+date1;
+		String year2=Integer.toString((course.getEndDate().getYear())+1900);
+		String month2=Integer.toString(course.getEndDate().getMonth());
+		String date2=Integer.toString(course.getEndDate().getDate());
+		String endDate=year2+"-"+month2+"-"+date2;
+		
+		return registrationDaoImpl.addCourse(course,startDate,endDate);
 	}
 	@GetMapping(path = "/fetchExistingCourses", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })

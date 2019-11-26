@@ -26,6 +26,7 @@ export class AddCourseComponent implements OnInit {
     this.submitted=true;
     if (this.addCourseForm.invalid)
       return;
+      console.log(this.addCourseForm.value.startDate);
     this.adminService.addCourse(this.addCourseForm.value).subscribe(resp => {
       this.added = resp.json();        
       if(this.added==1)

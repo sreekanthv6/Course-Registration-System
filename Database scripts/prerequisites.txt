@@ -9,8 +9,8 @@ CREATE TABLE "Registration DB"."Prerequisites"
     CONSTRAINT "Prerequisites_pkey" PRIMARY KEY ("courseId", "prerequisiteId"),
     CONSTRAINT "Prerequisites_courseId_fkey" FOREIGN KEY ("courseId")
         REFERENCES "Registration DB"."Courses" ("courseId") MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
     CONSTRAINT "Prerequisites_prereqId_fkey" FOREIGN KEY ("prerequisiteId")
         REFERENCES "Registration DB"."Courses" ("courseId") MATCH SIMPLE
         ON UPDATE CASCADE
@@ -31,4 +31,13 @@ ALTER TABLE "Registration DB"."Prerequisites"
 CREATE INDEX "fki_Prerequisites_courseId_fkey"
     ON "Registration DB"."Prerequisites" USING btree
     ("courseId" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+-- Index: fki_Prerequisites_prereqId_fkey
+
+-- DROP INDEX "Registration DB"."fki_Prerequisites_prereqId_fkey";
+
+CREATE INDEX "fki_Prerequisites_prereqId_fkey"
+    ON "Registration DB"."Prerequisites" USING btree
+    ("prerequisiteId" COLLATE pg_catalog."default")
     TABLESPACE pg_default;

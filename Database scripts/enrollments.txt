@@ -10,7 +10,7 @@ CREATE TABLE "Registration DB"."Enrollments"
     year numeric(4,0) NOT NULL,
     grade "char",
     CONSTRAINT "Enrollments_pkey" PRIMARY KEY (id, "courseId", semester, year),
-    CONSTRAINT "Enrollments_courseid_fkey" FOREIGN KEY ("courseId")
+    CONSTRAINT "Enrollments_courseId_fkey" FOREIGN KEY ("courseId")
         REFERENCES "Registration DB"."Courses" ("courseId") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,

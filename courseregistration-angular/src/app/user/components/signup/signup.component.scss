@@ -57,6 +57,7 @@
     }
     h4{
         font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
     }
 
     
@@ -78,5 +79,9 @@
         color: white;
     }
 
+    .invalid-feedback{
+        color: red;
+        font-size: 15px;
+    }
     
 

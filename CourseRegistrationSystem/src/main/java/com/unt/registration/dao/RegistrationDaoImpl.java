@@ -53,17 +53,14 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public Boolean signup(User user) {
+	public int signup(User user) {
 		// TODO Auto-generated method stub
-		String sql = "INSERT INTO userdetails values(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO \"Registration DB\".\"Userdetails\" values(?,?,?,?,?,?,?,?)";
 		Object[] args = { user.getId(), user.getFirstName(), user.getLastName(), user.getEmail().toLowerCase(),
 				user.getMobile(), user.getDeptId(), 0, user.getPassword() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.NUMERIC, Types.VARCHAR,
 				Types.NUMERIC, Types.VARCHAR };
-		if (jdbcTemplate.update(sql, args, argTypes) == 1)
-			return true;
-		else
-			return false;
+		return jdbcTemplate.update(sql, args, argTypes);
 	}
 
 	@Override
@@ -80,15 +77,12 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
-	public Boolean resetPassword(User user) {
+	public int resetPassword(User user) {
 		// TODO Auto-generated method stub
 		String sql = "UPDATE \"Registration DB\".\"Userdetails\" SET password=? where id=?";
 		Object[] args = { user.getPassword(), user.getId() };
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR };
-		if (jdbcTemplate.update(sql, args, argTypes) == 1)
-			return true;
-		else
-			return false;
+		return jdbcTemplate.update(sql, args, argTypes);
 	}
 
 	public String getCurrentSemester() {
@@ -276,13 +270,12 @@ public class RegistrationDaoImpl implements RegistrationDao {
 		return jdbcTemplate.query(sql, args, new BeanPropertyRowMapper<Course>(Course.class));
 	}
 	@Override
-	public int addCourse(Course course) {
+	public int addCourse(Course course, String startDate, String endDate) {
 		// TODO Auto-generated method stub
-		System.out.println(course.getAmount());
 		String sql = "INSERT INTO \"Registration DB\".\"Courses\" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Object[] args = { course.getCourseId(), course.getCourseName(), course.getDeptId(), this.getCurrentSemester(),
 				Calendar.getInstance().get(Calendar.YEAR), true, course.getIsMandatory(),course.getStrength(),course.getDegree(),course.getProfessor(),
-				course.getCourseMaxStrength(),course.getCourseTimings(),course.getDays(),course.getStartDate(),course.getEndDate(), course.getAmount()};
+				course.getCourseMaxStrength(),course.getCourseTimings(),course.getDays(),startDate,endDate, course.getAmount()};
 		int[] argTypes = { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, 
 				Types.NUMERIC, Types.BOOLEAN, Types.BOOLEAN,Types.NUMERIC,Types.VARCHAR,Types.VARCHAR,
 				 Types.NUMERIC, Types.VARCHAR, Types.VARCHAR,Types.VARCHAR, Types.VARCHAR, Types.NUMERIC};

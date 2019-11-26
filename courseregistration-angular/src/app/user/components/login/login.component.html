@@ -43,7 +43,11 @@
     h4{
         font-family: Arial, Helvetica, sans-serif;
     }
-
+    h6{
+        color: white;
+        font-size: 30px;
+        align-content: center;
+    }
     
 
     button {
@@ -69,31 +73,25 @@
 <body class="body">
     <img src="assets/images/education.jpg" alt="img">
     <div class="box">
-        <form [formGroup]="loginForm" class="login100-form" (ngSubmit)="onSubmit()">
-            
-
+        <h6><b>COURSE REGISTRATION SYSTEM</b></h6><br>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="main" >
                 <h4 >User Login</h4>
-                <span class="symbol-input100">
                     <i class="fa fa-user" aria-hidden="true"></i>
-                </span> &nbsp;
-                <input type="text" formControlName="id" class=" input100 form-control" placeholder="Student ID"
+                &nbsp;
+                <input type="text" formControlName="id" placeholder="Student ID"
                     [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
-                <span class="focus-input100"></span>
 
-                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                <div *ngIf="(f.id.touched && f.id.errors) || (submitted && f.id.errors)" class="invalid-feedback">
                     <div *ngIf="f.id.errors.required">Student ID is required</div>
                 </div>
                 <br>
-                <span class="symbol-input100">
                     <i class="fa fa-lock" aria-hidden="true"></i>
-                </span>
                 &nbsp;
-                <input type="password" formControlName="password" class="input100 form-control" placeholder="Password"
+                <input type="password" formControlName="password" placeholder="Password"
                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                <span class="focus-input100"></span>
 
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="(f.password.touched && f.password.errors) ||(submitted && f.password.errors)" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">Password is required</div>
                     <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
                 </div>
@@ -102,15 +100,15 @@
                 <button type="submit" [disabled]="loading" class="login100-form-btn btn btn-primary">Login</button>
                 <br>
                 <br>
-                <span class="txt1">
+                <span >
                     Forgot
                 </span>
-                <a class="txt2" [routerLink]="['/resetPassword']">
+                <a  [routerLink]="['/resetPassword']">
                     Username / Password?
                 </a>
                 <br>
                 <br>
-                <a class="txt2" [routerLink]="['/signup']">
+                <a [routerLink]="['/signup']">
                     Create your Account
                     <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
                 </a>

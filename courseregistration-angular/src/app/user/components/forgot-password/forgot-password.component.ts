@@ -12,7 +12,7 @@ import { PasswordValidation } from '../../password.validation';
 export class ForgotPasswordComponent implements OnInit {
 resetPasswordForm: FormGroup;
 submitted = false;
-passwordReset: String;
+passwordReset: Number;
   constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
@@ -26,16 +26,16 @@ passwordReset: String;
     this.userService.resetPassword(this.resetPasswordForm.value).subscribe(resp => {
       let flag = resp.json(); this.passwordReset = flag;
 
-      if (this.passwordReset == "Password reset") {
+      if (this.passwordReset == 1) {
         this.userService.sendSubmitMessage("Password reset");
         alert("Your password has been reset successfully. Please login");
         this.router.navigate(['login']);
       }
-      else if(this.passwordReset=="invalid email"){
+      else if(this.passwordReset==2){
       this.userService.sendSubmitMessage("Invalid email");
         alert("Please enter the email address with which you have registered");
       }
-      else if(this.passwordReset=="Invalid user ID"){
+      else if(this.passwordReset==3){
         this.userService.sendSubmitMessage("Invalid user ID");
           alert("You did not sign up. Please make sure you have an account.");
         }

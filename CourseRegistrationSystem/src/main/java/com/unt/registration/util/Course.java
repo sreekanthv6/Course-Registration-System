@@ -15,21 +15,22 @@ public class Course {
 	private String degree;
 	private String professor;
 	private int courseMaxStrength;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private String days;
 	
 	
-	public String getStartDate() {
+	
+	public Date getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	public String getDays() {

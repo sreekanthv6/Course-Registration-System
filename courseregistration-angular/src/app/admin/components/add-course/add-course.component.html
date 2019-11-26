@@ -3,30 +3,9 @@
 <title>Course Registration System</title>
 </head>
 <style>
-        input[type=text],
+        input[type="text"], input[type="date"], input[type=number], input[type=password],
         select
          {
-            width: 75%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid green;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type=number],
-        select
-         {
-            width: 75%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid green;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-    
-        input[type=password] {
             width: 75%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -176,17 +155,24 @@
             </div>
         </div> 
         <div class="wrap-input100 wrap-right columnr form-group">
-            <input type="text" formControlName="days" class=" input100 form-control"
-                placeholder="Days"
+            <select class="dropdown" required formControlName="days" placeholder="Days"
                 [ngClass]="{ 'is-invalid': (submitted&&f.days.errors) || (f.days.touched && f.days.errors) }" />
             <span class="focus-input100"></span>
+            <option value='' selected>Days</option>
+                <option value='Monday' >Monday</option>
+                <option value='Tuesday' >Tuesday</option>
+                <option value='Wednesday' >Wednesday</option>
+                <option value='Thursday' >Thursday</option>
+                <option value='Friday' >Friday</option>
+                <option value='Saturday' >Saturday</option>
+                <option value='Sunday' >Sunday</option>
             <div *ngIf="(submitted&&f.days.errors) || (f.days.touched && f.days.errors)" class="invalid-feedback">
                 <div *ngIf="f.days.errors?.required">Days is required</div>
                 
             </div>
         </div> 
         <div class="wrap-input100 wrap-right columnr form-group">
-            <input type="text" formControlName="startDate" class=" input100 form-control"
+            <input type="date" formControlName="startDate" class=" input100 form-control"
                 placeholder="Start Date"
                 [ngClass]="{ 'is-invalid': (submitted&&f.startDate.errors) || (f.startDate.touched && f.startDate.errors) }" />
             <span class="focus-input100"></span>
@@ -196,7 +182,7 @@
             </div>
         </div> 
         <div class="wrap-input100 wrap-right columnr form-group">
-            <input type="text" formControlName="endDate" class=" input100 form-control"
+            <input type="date" formControlName="endDate" class=" input100 form-control"
                 placeholder="End Date"
                 [ngClass]="{ 'is-invalid': (submitted&&f.endDate.errors) || (f.endDate.touched && f.endDate.errors) }" />
             <span class="focus-input100"></span>

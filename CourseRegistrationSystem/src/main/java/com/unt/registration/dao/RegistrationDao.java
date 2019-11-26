@@ -17,9 +17,9 @@ public interface RegistrationDao {
 	public User userValidate(String id);
 	public int userExists(String id);
 	public int userIdProvided(String id);
-	public Boolean signup(User user);
+	public int signup(User user);
 	public List<Department> fetchAllDepartments();
-	public Boolean resetPassword(User user);
+	public int resetPassword(User user);
 	public String getEmail(String id);
 	public List<Course> getCourses(SelectCriteria selectCriteria);
 	public Course findCourse(String courseId);
@@ -40,7 +40,7 @@ public interface RegistrationDao {
 	public int ifPrerequisitesExist(String courseId);
 	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria);
 	public List<Course> fetchNotEnrolledCourses(User user);
-	public int addCourse(Course course);
+	public int addCourse(Course course, String startDate, String endDate);
 	public List<Course> fetchExistingCourses();
 	public int deleteCourse(String courseId);
 }

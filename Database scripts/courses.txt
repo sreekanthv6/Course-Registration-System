@@ -10,7 +10,6 @@ CREATE TABLE "Registration DB"."Courses"
     semester character varying COLLATE pg_catalog."default" NOT NULL,
     year numeric(4,0) NOT NULL,
     "isActive" boolean NOT NULL,
-    amount numeric,
     "isMandatory" boolean NOT NULL,
     strength numeric(3,0),
     degree character varying(2) COLLATE pg_catalog."default" NOT NULL,
@@ -20,7 +19,9 @@ CREATE TABLE "Registration DB"."Courses"
     days character varying COLLATE pg_catalog."default",
     "startDate" character varying COLLATE pg_catalog."default",
     "endDate" character varying COLLATE pg_catalog."default",
-    CONSTRAINT "Courses_CourseID_key" UNIQUE ("courseId")
+    amount numeric(4,0),
+    CONSTRAINT "Courses_pkey" PRIMARY KEY ("courseId", "courseName", semester, year),
+    CONSTRAINT "Courses_ukey" UNIQUE ("courseId")
 ,
     CONSTRAINT "Courses_fkey" FOREIGN KEY ("deptId")
         REFERENCES "Registration DB"."Departments" ("deptId") MATCH SIMPLE
