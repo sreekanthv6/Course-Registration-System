@@ -13,13 +13,23 @@ import { UserService } from 'src/app/user/services/user.service';
 export class HistoryComponent implements OnInit {
 user: User;
 payments: Array<Payment>;
+isEmpty: Boolean = false;
   constructor(private router: Router, private financeService: FinanceService, private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.getSession('user');
     this.financeService.pastPayments(this.user).subscribe(resp => {
       let flag: Payment[]=resp.json();
-      this.payments=flag;
+      console.log(flag);
+      if(flag.length==0)
+      {
+        this.isEmpty=true;
+      }
+      else{
+        // console.log(this.payments);
+        this.payments=flag;
+      }
+      
     });
   }
 

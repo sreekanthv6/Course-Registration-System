@@ -23,8 +23,10 @@
      background-color: #fff;
    }
    </style>
+   <div *ngIf="isEmpty"><h4>No Mandatory Courses are done</h4></div>
+
 <body class="box">
-    <div>
+    <div *ngIf="!isEmpty">
       <h6 >Mandatory courses which you have completed/enrolled:</h6>
         <table border=2 >
             <th>Course ID</th>
@@ -38,7 +40,8 @@
 </div>
 <br>
 <br>
-<div >
+<div *ngIf="isEmpty1"><h4>All Mandatory Courses are done</h4></div>
+<div *ngIf="!isEmpty1">
     <h6 > Mandatory courses which are yet to be done:</h6>
       <table border=2 >
           <th>Course ID</th>

@@ -16,17 +16,33 @@ export class MandateCoursesComponent implements OnInit {
   user: User;
 donecourses: Array<Course>;
 notenrolledcourses:Array<Course>;
+isEmpty: Boolean = false;
+isEmpty1: Boolean = false;
   constructor(private router: Router, private myclassesService: MyclassesService,private userService: UserService,) { }
 
   ngOnInit() {
     this.user = this.userService.getSession('user');
     this.myclassesService.mandatoryCoursesDone(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
-      this.donecourses=flag;
+      
+      if(flag.length==0){
+        this.isEmpty=true;
+        // alert("No Grades to Display!!")
+      }
+      else{
+        this.donecourses=flag;
+      }
     });
     this.myclassesService.mandatoryCoursesNotDone(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
-      this.notenrolledcourses=flag;
+      if(flag.length==0){
+        this.isEmpty=true;
+        // alert("No Grades to Display!!")
+      }
+      else{
+        this.notenrolledcourses=flag;
+      }
+      
     });
 
   }

@@ -17,7 +17,10 @@
      background-color: #fff;
    }
    </style>
-<div class="box">
+<div *ngIf="isEmpty"><h4>No Grades to Display!</h4></div>
+<div class="box" *ngIf="!isEmpty">
+    
+    
     <h4>Grades</h4>
   <table border=2 >
     

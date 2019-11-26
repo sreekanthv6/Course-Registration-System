@@ -33,6 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	@Autowired
 	JavaMailSender javaMailSender;
 
+	//Validate user
 	@Override
 	public User userValidate(String id, String password) {
 		// TODO Auto-generated method stub
@@ -48,7 +49,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return user;
 		}
 	}
-
+	
+	//User Signup
 	@Override
 	public String signup(User user) {
 		if (registrationDaoImpl.userIdProvided(user.getId()) != 0) {
@@ -63,12 +65,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return "Invalid user";
 	}
 
+	//fetch all departments
 	@Override
 	public List<Department> fetchAllDepartments() {
 		// TODO Auto-generated method stub
 		return registrationDaoImpl.fetchAllDepartments();
 	}
 
+	//reset password
 	@Override
 	public String resetPassword(User user) {
 		// TODO Auto-generated method stub
@@ -85,18 +89,21 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return "Invalid user ID";
 	}
 
+	//Get list of all courses
 	@Override
 	public List<Course> getCourses(SelectCriteria selectCriteria) {
 		// TODO Auto-generated method stub
 		return registrationDaoImpl.getCourses(selectCriteria);
 	}
 
+	//Find Course by courseid
 	@Override
 	public Course findCourse(String courseId) {
 		// TODO Auto-generated method stub
 		return registrationDaoImpl.findCourse(courseId);
 	}
 
+	//enroll
 	@Override
 	public int enroll(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
@@ -127,13 +134,15 @@ public class RegistrationServiceImpl implements RegistrationService {
 		}
 
 	}
-
+	
+	//Fetch enrolled Courses
 	@Override
 	public List<Course> fetchEnrolledCourses(User user) {
 		// TODO Auto-generated method stub
 		return registrationDaoImpl.fetchEnrolledCourses(user);
 	}
-
+	
+	//drop course
 	@Override
 	public boolean dropCourse(EnrollObject enrollObject) {
 		// TODO Auto-generated method stub
@@ -147,6 +156,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	}
 
+	//send email for enrolling/swap/drop
 	@Override
 	public boolean sendEmail(EnrollObject enrollObject, int value) {
 		String emailId;
@@ -183,7 +193,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return false;
 		}
 	}
-
+	
+	//view dues
 	@Override
 	public float viewDues(Payment payment) {
 		// TODO Auto-generated method stub
@@ -193,6 +204,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	}
 
+	//send email for payment
 	@Override
 	public void sendEmailForPayment(Payment payment) {
 		String emailId;
@@ -212,11 +224,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 			javaMailSender.send(msg);
 
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e);
+			System.out.print(e);
 
 		}
 	}
-
+	
+	//post payment activities
 	@Override
 	public int postPayment(Payment payment) {
 		// TODO Auto-generated method stub
@@ -237,6 +250,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		return 1;
 	}
 
+	//swap course
 	@Override
 	public int swapCourse(SwapCourse swapCourse) {
 		// TODO Auto-generated method stub
@@ -262,18 +276,23 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return j;
 	}
 
+	//fetch Available Courses
 	@Override
 	public List<Course> fetchAvailableCourses(SelectCriteria selectCriteria) {
 		// TODO Auto-generated method stub
 		
 		return registrationDaoImpl.fetchAvailableCourses(selectCriteria);
 	}
+	
+	//fetch Not Enrolled Courses
 	@Override
 	public List<Course> fetchNotEnrolledCourses(User user) {
 		// TODO Auto-generated method stub
 		
 		return registrationDaoImpl.fetchNotEnrolledCourses(user);
 	}
+	
+	//fetch Existing Courses
 	@Override
 	public List<Course> fetchExistingCourses() {
 		// TODO Auto-generated method stub

@@ -14,6 +14,7 @@ import { UserService } from 'src/app/user/services/user.service';
 export class ClassScheduleComponent implements OnInit {
 enrolledcourses: Array<Course>;
 user: User;
+isEmpty: Boolean = false;
   constructor(private router: Router,private userService: UserService, private myClassesService: MyclassesService, private registrationService: RegistrationService) { }
 
   ngOnInit() {
@@ -21,7 +22,14 @@ user: User;
     this.user = this.userService.getSession('user');
     this.registrationService.fetchEnrolledCourses(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
-      this.enrolledcourses=flag;
+      if(flag.length==0){
+        this.isEmpty=true;
+        // alert("No Grades to Display!!")
+      }
+      else{
+        this.enrolledcourses=flag;
+      }
+      
     });
   }
 
