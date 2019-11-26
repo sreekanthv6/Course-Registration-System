@@ -12,4 +12,8 @@ export class ContactUsComponent implements OnInit {
   ngOnInit() {
   }
 
+  onsubmit(text: any){
+alert("Our support team has been notified");
+  }
+
 }

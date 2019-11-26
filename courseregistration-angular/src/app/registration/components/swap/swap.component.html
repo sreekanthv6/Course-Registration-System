@@ -59,7 +59,8 @@
       <div>
         <table><tr><td>Please select the enrolled course you want to swap</td>
         <td><select class="dropdown" required formControlName="enrolledCourse" name="enrolledCourse">
-       <option value='' selected></option>
+
+       <option value='' selected>Select</option>
 <option *ngFor="let course of enrolledCourses" value={{course.courseId}}>
     {{course.courseName}}
 </option>
@@ -69,7 +70,7 @@
 <tr>
   <td>Please select the course you want to swap with</td>
   <td><select class="dropdown" required formControlName="swapCourse" name="swapCourse">
-      <option value='' selected></option>
+      <option value='' selected>Select</option>
 <option *ngFor="let course of notEnrolledCourses" value={{course.courseId}}>
    {{course.courseName}}
 </option>
