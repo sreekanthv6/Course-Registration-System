@@ -40,6 +40,8 @@ this.payment.id=this.user.id;
       alert("Your payment is successful");
       else if(this.paid==1)
       alert("You entered amount which is higher than your due");
+      else if(this.paid==2)
+      alert("Payment can not be 0 or less");
       else
       alert("Error occured. Please contact finance office");
     });

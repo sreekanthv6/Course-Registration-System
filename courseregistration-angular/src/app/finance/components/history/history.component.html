@@ -24,7 +24,9 @@
    }
    </style>
 <body background="school.jpg">
-    <div>
+  <div *ngIf></div>
+  <div *ngIf="isEmpty"><h4>No payments done yet!</h4></div>
+    <div *ngIf="!isEmpty">
         <h5 align=center>Past payments</h5>
         <table class="box" border=2 >
             

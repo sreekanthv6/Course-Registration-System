@@ -12,6 +12,7 @@ import { UserService } from 'src/app/user/services/user.service';
 export class GradesComponent implements OnInit {
 user: User;
 gradeObjects: Array<Grade>;
+isEmpty: Boolean = false;
   constructor(private myClassesService: MyclassesService,private userService: UserService,) { }
 
   ngOnInit() {
@@ -19,7 +20,14 @@ gradeObjects: Array<Grade>;
     this.user = this.userService.getSession('user');
     this.myClassesService.viewGrades(this.user).subscribe(resp => {
       let flag: Grade[]=resp.json();
-      this.gradeObjects=flag;  
+      if(flag.length==0){
+        this.isEmpty=true;
+        // alert("No Grades to Display!!")
+      }
+      else{
+        this.gradeObjects=flag;
+      }
+        
     });
   }
 

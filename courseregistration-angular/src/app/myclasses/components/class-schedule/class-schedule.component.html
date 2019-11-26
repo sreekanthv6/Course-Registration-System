@@ -24,7 +24,8 @@
  }
  </style>
 <body>
-    <div class="box">
+    <div *ngIf="isEmpty"><h4>No Classes to Display!</h4></div>
+    <div class="box" *ngIf="!isEmpty">
         <h4>Class Schedule</h4>
         <table border=2 >
           
