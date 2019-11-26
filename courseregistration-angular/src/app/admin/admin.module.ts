@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminService } from './services/admin.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AddCourseComponent, AdminIndexComponent, DeleteCourseComponent],
@@ -15,7 +16,8 @@ import { AdminService } from './services/admin.service';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    NgxSpinnerModule
     
   ],
   providers: [

@@ -5,6 +5,7 @@ import { Course } from 'src/app/registration/model/course';
 import { User } from 'src/app/user/model/user';
 import { Payment } from 'src/app/finance/model/payment';
 import { UserService } from 'src/app/user/services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-mandate-courses',
@@ -18,9 +19,10 @@ donecourses: Array<Course>;
 notenrolledcourses:Array<Course>;
 isEmpty: Boolean = false;
 isEmpty1: Boolean = false;
-  constructor(private router: Router, private myclassesService: MyclassesService,private userService: UserService,) { }
+  constructor(private router: Router, private spinner: NgxSpinnerService, private myclassesService: MyclassesService,private userService: UserService,) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.user = this.userService.getSession('user');
     this.myclassesService.mandatoryCoursesDone(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
@@ -35,6 +37,7 @@ isEmpty1: Boolean = false;
     });
     this.myclassesService.mandatoryCoursesNotDone(this.user).subscribe(resp => {
       let flag: Course[]=resp.json();
+      this.spinner.hide();
       if(flag.length==0){
         this.isEmpty=true;
         // alert("No Grades to Display!!")

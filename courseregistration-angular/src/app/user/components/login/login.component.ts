@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { User } from '../../model/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +15,21 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   user: User;
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private spinner: NgxSpinnerService, private userService: UserService, private router: Router) { }
   
   ngOnInit() {
     this.loginForm = this.formBuilder.group({ id: ['', Validators.required], password: ['', [Validators.required, Validators.minLength(6)]] });
   }
   get f() { return this.loginForm.controls; }
   onSubmit() {
+    this.spinner.show();
     this.submitted=true;
     if (this.loginForm.invalid)
       return;
       console.log(JSON.stringify(this.loginForm.value));
     this.userService.login(this.loginForm.value).subscribe(resp => {
       this.user = resp.json();
+      this.spinner.hide();
       if (this.user.userExists == false) {
         this.userService.sendSubmitMessage("Error::"+this.user.id + " not found");
         alert("Invalid user");

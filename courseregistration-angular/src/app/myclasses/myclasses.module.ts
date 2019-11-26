@@ -7,6 +7,7 @@ import { MyclassesRoutingModule } from './myclasses-routing.module';
 import { GradesComponent } from './components/grades/grades.component';
 import { MandateCoursesComponent } from './components/mandate-courses/mandate-courses.component';
 import { ClassScheduleComponent } from './components/class-schedule/class-schedule.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [GradesComponent, ClassScheduleComponent, MandateCoursesComponent],
@@ -15,7 +16,8 @@ import { ClassScheduleComponent } from './components/class-schedule/class-schedu
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    MyclassesRoutingModule
+    MyclassesRoutingModule,
+    NgxSpinnerModule
   ],
   providers: [
   MyclassesService

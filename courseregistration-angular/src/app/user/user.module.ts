@@ -7,6 +7,7 @@ import { Http, HttpModule } from '@angular/http';
 import { UserRoutingModule } from './user-routing.module';
 import { SignupComponent } from './components/signup/signup.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 //import { MatCardModule } from '@angular/material';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    UserRoutingModule
+    UserRoutingModule,
+    NgxSpinnerModule
     
   ],
   providers: [

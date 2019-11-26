@@ -4,6 +4,7 @@ import { UserService } from '../../../user/services/user.service';
 import { Course } from '../../model/course';
 import { User } from 'src/app/user/model/user';
 import { EnrollObject } from 'src/app/registration/model/enroll-object';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +17,7 @@ export class CartComponent implements OnInit {
   user: User;
   enrolled: Number;
   enrollObject: EnrollObject = new EnrollObject();
-  constructor(private userService: UserService, private registrationService: RegistrationService) { }
+  constructor(private userService: UserService, private registrationService: RegistrationService, private spinner: NgxSpinnerService) { }
   ngOnInit() {
     
     this.user = this.userService.getSession('user');
@@ -51,11 +52,13 @@ export class CartComponent implements OnInit {
     this.loadCart();
   }
   enroll(courseId: string) {
+    this.spinner.show();
     this.enrollObject.userId = this.user.id;
     this.enrollObject.courseId = courseId;
     console.log(JSON.stringify(this.enrollObject));
     this.registrationService.enroll(this.enrollObject).subscribe(resp => {
       this.enrolled = resp.json(); 
+      this.spinner.hide();
       if (this.enrolled == 1) {
         
         alert("Enrolled Successfully");

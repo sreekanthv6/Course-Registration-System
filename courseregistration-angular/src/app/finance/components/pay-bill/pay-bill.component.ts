@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/user/model/user';
 import { Payment } from '../../model/payment';
 import { UserService } from 'src/app/user/services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-pay-bill',
@@ -17,7 +18,7 @@ export class PayBillComponent implements OnInit {
   paid: Number;
   user: User;
   payment: Payment=new Payment();
-  constructor(private formBuilder: FormBuilder, private financeService: FinanceService, private router: Router, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private spinner: NgxSpinnerService, private financeService: FinanceService, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.getSession('user');
@@ -32,10 +33,12 @@ export class PayBillComponent implements OnInit {
 
   }
   onsubmit(){
+    this.spinner.show();
 this.payment.paymentAmount=this.paymentForm.value.paymentAmount;
 this.payment.id=this.user.id;
     this.financeService.postPayment(this.payment).subscribe(resp => {
       this.paid = <Number>resp.json();
+      this.spinner.hide();
       if(this.paid==0)
       alert("Your payment is successful");
       else if(this.paid==1)

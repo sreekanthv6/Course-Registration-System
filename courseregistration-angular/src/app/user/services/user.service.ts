@@ -33,7 +33,7 @@ getSession(key: string): any {
   }
 }
 clearSession(): void {
-  localStorage.clear();
+  sessionStorage.clear();
 }
   signup(user: User): any {
     const httpHeaderOptions =

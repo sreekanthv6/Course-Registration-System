@@ -6,6 +6,7 @@ import { Department } from '../../model/department';
 import { Router } from '@angular/router';
 import { PasswordValidation } from '../../password.validation';
 import { DropdownValidation } from '../../dropdown.required.validation';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,7 +22,7 @@ export class SignupComponent implements OnInit {
   loading = false;
   departments: Array<Department>;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private spinner: NgxSpinnerService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({ id: ['', Validators.required], firstName: ['', Validators.required], lastName: ['', Validators.required], email: ['', Validators.required], deptId: '', mobile: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]], password: ['', [Validators.required, Validators.minLength(6)]], confirmPassword: ['', [Validators.required]] }, { validator:[PasswordValidation.MatchPassword,DropdownValidation.DeptRequired]});
@@ -29,13 +30,14 @@ export class SignupComponent implements OnInit {
   }
   get f() { return this.signupForm.controls;}
   onSubmit() {
+    this.spinner.show();
     this.submitted=true;
     if (this.signupForm.invalid)
       return;
     this.userService.signup(this.signupForm.value).subscribe(resp => {
       let flag = resp.json(); 
       this.userSignedUp = flag;
-
+      this.spinner.hide();
       if (this.userSignedUp == 1) {
         this.userService.sendSubmitMessage("Your account has been created Successfully");
         alert("Your account has been created Successfully. Please login");

@@ -55,7 +55,9 @@
         
     </style>
 
-    <body class="box"><form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
+    <body class="box">
+            <ngx-spinner></ngx-spinner>
+        <form  [formGroup]="addCourseForm" class=login100-form (ngSubmit)="onSubmit()">
                         
         <h4>Add Course</h4>
         
@@ -156,7 +158,7 @@
         </div> 
         <div class="wrap-input100 wrap-right columnr form-group">
             <select class="dropdown" required formControlName="days" placeholder="Days"
-                [ngClass]="{ 'is-invalid': (submitted&&f.days.errors) || (f.days.touched && f.days.errors) }" />
+                [ngClass]="{ 'is-invalid': (submitted&&f.days.errors) || (f.days.touched && f.days.errors) }" >
             <span class="focus-input100"></span>
             <option value='' selected>Days</option>
                 <option value='Monday' >Monday</option>
@@ -166,6 +168,7 @@
                 <option value='Friday' >Friday</option>
                 <option value='Saturday' >Saturday</option>
                 <option value='Sunday' >Sunday</option>
+        </select>
             <div *ngIf="(submitted&&f.days.errors) || (f.days.touched && f.days.errors)" class="invalid-feedback">
                 <div *ngIf="f.days.errors?.required">Days is required</div>
                 

@@ -11,6 +11,7 @@ import { StudentIndexComponent } from './components/student-index/student-index.
 import { SelectCriteriaComponent } from './components/select-criteria/select-criteria.component';
 import { CartComponent } from './components/cart/cart.component';
 import { RegistrationService } from 'src/app/registration/services/registration.service';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RegistrationService } from 'src/app/registration/services/registration.
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RegistrationRoutingModule
+    RegistrationRoutingModule,
+    NgxSpinnerModule
   ],
   providers: [
     RegistrationService,

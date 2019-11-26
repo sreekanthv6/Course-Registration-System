@@ -7,6 +7,7 @@ import { FinanceRoutingModule } from './finance-routing.module';
 import { FinanceService } from './services/finance.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [PayBillComponent, HistoryComponent, ContactUsComponent],
@@ -16,7 +17,7 @@ import { ContactUsComponent } from './components/contact-us/contact-us.component
     ReactiveFormsModule,
     HttpModule,
     FinanceRoutingModule,
-
+    NgxSpinnerModule
   ],
   providers: [
     FinanceService
